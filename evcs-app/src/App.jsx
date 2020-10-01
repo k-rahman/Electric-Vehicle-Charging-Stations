@@ -6,7 +6,6 @@ import LoginForm from './components/LoginForm';
 import Register from './components/Register';
 
 function App() {
-
    const LINKS = [
          {name: 'Login', path: '/login'},
          {name: 'register', path: '/register'}

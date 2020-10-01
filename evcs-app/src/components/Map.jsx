@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMapGL from 'react-map-gl';
+import debounce from 'lodash.debounce';
+
 
 const Map = () => {
    const [viewport, setViewport] = useState({
@@ -9,6 +11,23 @@ const Map = () => {
       longitude: 25.7482,
       zoom: 6
    });
+
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      setViewport({
+        ...viewport,
+        height: window.innerHeight,
+        width: window.innerWidth,
+      })
+    }, 150);
+
+   window.addEventListener('resize', debouncedHandleResize)
+
+   return _ => {
+    window.removeEventListener('resize', debouncedHandleResize)
+  }
+  
+  })
 
    const TOKEN =process.env.REACT_APP_MAPBOX_TOKEN;
 
