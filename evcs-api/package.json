@@ -1,0 +1,34 @@
+{
+  "name": "evcs-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "config": "^3.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-rahman/graded-exercise.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Karim Abdelrahman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k-rahman/graded-exercise/issues"
+  },
+  "homepage": "https://github.com/k-rahman/graded-exercise#readme"
+}
