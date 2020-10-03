@@ -26,6 +26,8 @@
   max-width: 350px;
   max-height: 247px;
   font-size: 13px;
+  border: 0;
+  cursor: pointer;
 }
 
 .card-body {
@@ -47,7 +49,6 @@
 }
 
 .mapboxgl-popup-content {
-  padding: 0;
   border-radius: 5px;
 }
 
