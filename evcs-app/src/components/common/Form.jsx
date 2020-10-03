@@ -35,7 +35,7 @@ class Form extends Component {
   renderButton(label) {
     return (
       <button
-        type="submit" className="btn btn-primary form-control">{label}</button>
+        type="submit" className="btn form-control" style={{ backgroundColor: '#00ccb2' }}>{label}</button>
     );
   }
 
