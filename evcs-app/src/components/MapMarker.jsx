@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Marker } from 'react-map-gl';
 
-const API = process.env.REACT_APP_EVCS_API;
+const server = process.env.REACT_APP_SERVER;
 
-const MapMarker = ({ locations }) => {
+const MapMarker = ({ locations, onMarkerClick }) => {
   return (
     locations.map(location =>
       <Marker
@@ -13,11 +13,14 @@ const MapMarker = ({ locations }) => {
         longitude={location.lng}
         offsetLeft={20}
         offsetTop={-20}>
-        <Link to={`/locations/${location.id}`}>
+        <Link 
+          to={`/locations/${location.id}`} 
+          className='remove-focus-outline'>
           <img
             className='marker-img'
-            src={`${API}/icons/charging-station.svg`}
-            alt='Charging Stations' />
+            onClick={() => onMarkerClick(location)}
+            src={`${server}/icons/charging-station.svg`}
+            alt='Charging Station' />
         </Link>
       </Marker>
     )
