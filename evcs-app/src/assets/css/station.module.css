@@ -1,0 +1,29 @@
+.card {
+  width: 348px;
+  margin-left: 1px;
+  margin-top: 5px;
+
+}
+
+.card-header {
+display: flex;
+justify-content: space-between;
+padding: 5px 20px;
+background-color: white;
+}
+
+.charging-btn {
+  background-color: #228b22;
+  color: white;
+}
+
+.badge {
+  font-size: 1em;
+  padding: 0px 10px;
+  color: #228b22;
+  border-color: #228b22;
+  border-width: 2px;
+  border-style: double;
+  text-align: center;
+  flex: 1 1 0;
+}

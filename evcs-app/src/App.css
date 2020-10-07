@@ -1,12 +1,26 @@
+body {
+  overflow: hidden;
+}
 .App {
   text-align: center;
+}
+
+.navbar {
+  background-color: #00959a;
+  z-index: 3;
+}
+
+.btn:active {
+  color: black !important;
+}
+
+.btn:focus{
+  color: black !important;
 }
 
 .active-link {
   color:  black !important;
 }
-
-
 
 .marker-img {
   width: 44px;
@@ -14,45 +28,43 @@
   cursor: pointer;
 }
 
-/*.card-img-top {
-  max-width: 350px;
-  max-height: 130px;
-}*/
-
-.card {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-width: 350px;
-  max-height: 247px;
-  font-size: 13px;
-  border: 0;
-  cursor: pointer;
+.remove-focus-outline:focus {
+  outline: none;
 }
 
-.card-body {
-  flex: 1 1 0;
-  padding: 0;
-}
-
-.card-title {
-  margin-bottom: 0;
-  font-weight: 500;
-  padding: 4px;
-}
-
-.card-text {
-  margin-bottom: 0;
-  font-weight: 500;
-  padding: 4px;
-  color: #777;
-}
 
 .mapboxgl-popup-content {
   border-radius: 5px;
 }
 
 .mapboxgl-popup-close-button {
- /* color: white; */
   z-index: 1;
 }
+
+.slide-pane__content {
+  padding: 0;
+}
+
+.sliding-pane-overlay.ReactModal__Overlay--after-open {
+  background-color: rgba(0, 0,0, 0);
+  width: 0;
+}
+
+.sliding-pane-content.ReactModal__Content--after-open {
+  Width: 75vh;
+  padding: 0;
+}
+
+/*.slide-pane__overlay {
+  top: 55vh;
+}
+
+.slide-pane__overlay.ReactModal__Overlay--after-open{
+  background-color: rgba(255, 255, 255 , 0);
+}
+.slide-pane_from_bottom.ReactModal__Content--after-open {
+
+  width: 100vh;
+  height: 45vh;
+  top: 55vh;
+}*/

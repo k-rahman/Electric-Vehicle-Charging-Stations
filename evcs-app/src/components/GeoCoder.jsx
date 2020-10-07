@@ -14,7 +14,7 @@ const GeoCoder = ({ mapRef, onViewportChange }) => {
       //localGeocoder={forwardGeocoder}
       //render={handleRender}
       countries="FI"
-      position="top-left"
+      position="top-right"
       reverseGeocode={true}
       enableEventLogging={false}
     />
