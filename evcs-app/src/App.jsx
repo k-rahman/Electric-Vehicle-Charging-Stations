@@ -1,37 +1,86 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Route } from 'react-router-dom';
-import Map from './components/Map';
+import { Route, useHistory } from 'react-router-dom';
+import { getLocations, getLocationById } from './services/locationService';
+import { ToastContainer } from 'react-toastify';
 import NavBar from './components/common/NavBar';
+import Map from './components/Map';
+import SlidingPane from './components/SlidingPane';
 import LoginForm from './components/LoginForm';
 import Register from './components/Register';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-const API = process.env.REACT_APP_EVCS_API;
+const links = [
+   { name: 'Login' },
+   { name: 'Register' }
+];
 
 const App = () => {
+   const [showLogin, setShowLogin] = useState(false);
+   const [showRegister, setShowRegister] = useState(false);
    const [locations, setLocations] = useState([]);
-   const LINKS = [
-      { name: 'Login', path: '/login' },
-      { name: 'register', path: '/register' }
-   ];
+   const [selectedLocation, setSelectedLocation] = useState(null);
 
    useEffect(() => {
-      console.log('mounted');
-      axios
-         .get(`${API}/api/locations`)
-         .then(res => {
-            setLocations(res.data);
-         })
+      const fetchLocations = async () => {
+         const { data } = await getLocations();
+         setLocations(data);
+      }
+      fetchLocations();
+
    }, []);
 
+
+   const handleModalOpen = ({ currentTarget: link }) => {
+      if (link.name === 'Login') setShowLogin(true);
+      if (link.name === 'Register') setShowRegister(true);
+   }
+
+   const handleModalClose = () => {
+      setShowLogin(false);
+      setShowRegister(false);
+   };
+
+   const handleLocationSelect = location => {
+      setSelectedLocation(location);
+   }
+
+   const handleLocationChange = async locationId => {
+      const { data: location } = await getLocationById(locationId);
+      setSelectedLocation(location);
+      console.log('selected location is now: ', selectedLocation)
+   }
+
+   const handlePopupClose = () => {
+      setSelectedLocation(null);
+   }
+
+   // const handleNoLocationSelect = () => {
+   //   this.setState({ showPopup: false });
+   //   this.props.history.push('/');
+   // };
    return (
       <>
-         <NavBar siteName='EVCS' Links={LINKS} />
-         <Route path={['/locations/:id', '/']} render={routingProps =>
-            <Map locations={locations} {...routingProps} />} />
-         <Route path='/login' component={LoginForm} />
-         <Route path='/Register' component={Register} />
+         <ToastContainer />
+         <NavBar siteName='EVCS' Links={links} onLinkClick={handleModalOpen} />
+         <Route
+            path={'/'}
+            render={props =>
+               <Map
+                  locations={locations}
+                  selectedLocation={selectedLocation}
+                  onPopupClose={handlePopupClose}
+                  onMarkerClick={handleLocationSelect}
+                  {...props} />} />
+         <Route
+            path={'/locations/:id'}
+            render={props =>
+               <SlidingPane
+                  selectedLocation={selectedLocation}
+                  onUrlChange={handleLocationChange}
+                  {...props} />} />
+         {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
+         {(showRegister) && <Register onModalClose={handleModalClose} />}
          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
       </>
    );
