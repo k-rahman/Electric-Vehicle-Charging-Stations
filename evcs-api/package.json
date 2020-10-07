@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-http": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
