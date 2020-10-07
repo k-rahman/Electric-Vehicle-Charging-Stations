@@ -1,12 +1,14 @@
 import React from 'react';
+import styles from '../../assets/css/popup.module.css';
 
-const MapCard = ({ title, text, subText }) => {
+const MapCard = ({ title, text }) => {
   return (
-    <div className='card rounded-lg'>
-      <div className="card-body rounded-lg">
-        <p className="card-title">{title}</p>
-        <p className="card-text">{text}</p>
-        <p className="card-text"><small className="text-muted">{subText}</small></p>
+    <div className={`${styles.card} ${styles['rounded-lg']}`}>
+      <div 
+        className={`${styles['card-body']}
+          ${styles['rounded-lg']}`}>
+        <p className={`${styles['card-title']}`}>{title}</p>
+        <p className={`${styles['card-text']}`}>{text}</p>
       </div>
     </div>
   );
