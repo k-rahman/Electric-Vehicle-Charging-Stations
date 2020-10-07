@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { getOutletsByStationId } from './../services/ouletService';
+import React, { useEffect } from 'react';
 import OutletCard from './OutletCard';
 import styles from '../assets/css/station.module.css';
 
-const StationCard = ({ station, stationNumber, checkOutletStatus, available, outOfService, outlets }) => {
+const StationCard = ({ station, stationNumber, outlets, status, checkStatus  }) => {
   const { code, type } = station;
-  // const [available, setAvailable] = useState(0);
-  // const [outlets, setOutLets] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchOutlets = async () => {
-  //     const { data } = await getOutletsByStationId(station.id);
-  //     const availableArr = data.filter(outlet => outlet.status === "Available");
-  //     setAvailable(availableArr.length)
-  //     setOutLets(data);
-  //   }
-  //   fetchOutlets();
-  // }, []);
 
   useEffect(() => {
-    checkOutletStatus(outlets);
+    checkStatus(outlets);
     console.log('Station send to get outlet status');
   }, []);
 
   const pluralOrSingular = counter => {
     if (counter > 1) return 's';
     return '';
-  }
-
-  
+  };
 
   return (
     <div className={`${styles.card} card shadow-lg`}>
@@ -43,7 +28,7 @@ const StationCard = ({ station, stationNumber, checkOutletStatus, available, out
         <li className='list-group-item'>
 <div className='d-flex justify-content-center'>
         <span className={`${styles.badge}`}>
-          {available} outlet{pluralOrSingular(available)} available
+          {status} outlet{pluralOrSingular(status)} available
         </span>
 
       </div>
@@ -57,7 +42,7 @@ const StationCard = ({ station, stationNumber, checkOutletStatus, available, out
             <div>
               <button
                 id="charging-btn"
-                disabled={available > 1 ? true : false}
+                disabled={status > 1 ? true : false}
                 className={`${styles['charging-btn']} btn`}>Start charging</button>
             </div>
           </div>
