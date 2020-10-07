@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
   passport.authenticate('basic', (err, user, info) => {
     if (err) return next(err);
     if (!user) return res.status(400).send('Invalid email or password.');
-    res.sendStatus(200);
+    res.send(user);
   })(req, res, next);
 });
 

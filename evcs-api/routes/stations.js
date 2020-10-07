@@ -16,9 +16,9 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
    const { id } = req.params;
-  db.query('SELECT JSON_ARRAYAGG(JSON_OBJECT("id", s.id, "code", s.code, "type", s.type'
-    + ', "outlets", JSON_ARRAY(JSON_OBJECT("id", o.id, "status", o.status' 
-    + ', "power", o.power, "connector", c.name, "payment", p.payment, "unit", p.unit))))'
+  db.query('SELECT JSON_ARRAYAGG(JSON_OBJECT("id", s.id, "type", s.type'
+    + ', "outlets", JSON_ARRAY(JSON_OBJECT("id", o.id, "code", o.code, "status", o.status' 
+    + ', "power", o.power, "connector", c.name, "image", c.img, "payment", p.payment, "unit", p.unit))))'
     + ' as stations'
     + ' FROM stations as s'
     + ' JOIN locations as l ON l.id = s.location'

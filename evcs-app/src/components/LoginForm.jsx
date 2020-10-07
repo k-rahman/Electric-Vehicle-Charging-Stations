@@ -1,9 +1,9 @@
 import React from 'react';
+import $ from 'jquery';
 import Joi from 'joi';
+import 'bootstrap/js/dist/modal.js';
 import { login } from '../services/authService';
 import Form from './common/Form';
-import $ from 'jquery';
-import 'bootstrap/js/dist/modal.js';
 
 class LoginForm extends Form {
 
@@ -43,8 +43,10 @@ class LoginForm extends Form {
    doSubmit = async() => {
       try {
       const { data } = this.state;
-      const res = await login(data.email, data.password);
-       if (res) {
+      const {data: user} = await login(data.email, data.password);
+      localStorage.setItem('name', user[0].name);
+      window.location.reload();
+       if (user) {
          $(this.modal.current).modal('hide');
          this.props.onModalClose();
          }

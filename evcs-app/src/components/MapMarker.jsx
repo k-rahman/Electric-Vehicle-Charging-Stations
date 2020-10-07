@@ -18,6 +18,7 @@ const MapMarker = ({ locations, onMarkerClick }) => {
           className='remove-focus-outline'>
           <img
             className='marker-img'
+            onMarkerClick={onMarkerClick}
             src={`${server}/icons/charging-station.svg`}
             alt='Charging Station' />
         </Link>

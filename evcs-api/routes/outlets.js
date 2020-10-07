@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
-  db.query('SELECT o.id, o.station, o.status, o.power, c.name, c.img, p.payment, p.unit'
+  db.query('SELECT o.id, o.code,  o.status, o.power, o.station, c.name, c.img, p.payment, p.unit'
   + ' FROM outlets as o'
   + ' JOIN stations as s ON s.id = o.station'
   + ' JOIN connectors as c ON c.id = o.connector'

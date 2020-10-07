@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useHistory, Switch, Redirect } from 'react-router-dom';
 import { getLocations, getLocationById } from './services/locationService';
 import { getStationsByLocationId } from './services/stationService';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import NavBar from './components/common/NavBar';
 import Map from './components/Map';
 import SlidingPane from './components/SlidingPane';
 import LoginForm from './components/LoginForm';
 import Register from './components/Register';
+import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-
-const links = [
-   { name: 'Login' },
-   { name: 'Register' }
-];
 
 const App = () => {
    const [showLogin, setShowLogin] = useState(false);
    const [showRegister, setShowRegister] = useState(false);
+   const [loggedIn, setLoggedIn] = useState(null);
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
    const [stations, setStations] = useState([]);
@@ -31,7 +28,7 @@ const App = () => {
          setLocations(data);
       }
       fetchLocations();
-
+      logIn();
       history.listen(handleRouterChange)
    }, []);
 
@@ -54,6 +51,10 @@ const App = () => {
    const handleModalOpen = ({ currentTarget: link }) => {
       if (link.name === 'Login') setShowLogin(true);
       if (link.name === 'Register') setShowRegister(true);
+      if (link.name === 'Logout') {
+         localStorage.removeItem('name')
+         window.location.reload();
+      }
    };
 
    const handleModalClose = () => {
@@ -79,12 +80,21 @@ const App = () => {
       }
    }
 
+   const logIn = () => {
+      const user = localStorage.getItem('name');
+      setLoggedIn(user);
+   };
+
    return (
       <>
          <ToastContainer />
-         <NavBar siteName='EVCS' Links={links} onLinkClick={handleModalOpen} />
+         <NavBar 
+            siteName='EVCS' 
+            user={loggedIn}
+            onLinkClick={handleModalOpen} 
+            />
          <Route
-            path={'/'}
+            path={['/locations/:id','/']}
             render={props =>
                <Map
                   locations={locations}
