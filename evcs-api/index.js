@@ -1,8 +1,12 @@
 const helmet = require('helmet');
 const cors = require('cors');
 const express = require('express');
-const db = require('./db');
+const db = require('./db/index');
 const locations = require('./routes/locations');
+const users = require('./routes/users');
+const stations = require('./routes/stations');
+const outlets = require('./routes/outlets');
+const auth = require('./routes/auth.js');
 const app = express();
 
 const PORT = process.env.PORT || 3200;
@@ -13,15 +17,21 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/api/locations', locations);
+app.use('/api/locations/stations', stations);
+app.use('/api/locations/stations/outlets', outlets);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
+
 
 /* DB init */
-Promise.all(
-  [
-    db.query('USE EVCS')
-    // Add more table create statements if you need more tables
-  ]
-).then(() => {
+// Promise.all(
+//   [
+//     db.query('USE EVCS')
+//     // Add more table create statements if you need more tables
+//   ]
+// ).then(() => {
+// })
+//   .catch(error => console.log(error));
+
   console.log('Database connection is openedّّ successfully!');
   app.listen(PORT, () => console.log(`Server is up and listening on ${PORT}...`));
-})
-  .catch(error => console.log(error));
