@@ -1,39 +1,37 @@
 import React from 'react';
 import Joi from 'joi';
+import { login } from '../services/authService';
 import Form from './common/Form';
 import $ from 'jquery';
 import 'bootstrap/js/dist/modal.js';
 
 class LoginForm extends Form {
-   constructor(props) {
-      super(props);
-      
-      this.state = {
-         data: { email: '', password: '' },
-         errors: {}
-      };
 
-      this.schema = Joi.object({
-         email: Joi
-            .string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-            .required()
-            .messages({
-               'string.email': `"Email" must be valid. ex: 'name@domain.com'`,
-               'string.empty': `"Email" cannot be empty`,
-               'any.required': `"Email" is required`
-            })
-            .label('Email'),
-         password: Joi
-            .string()
-            .required()
-            .messages({
-               'string.empty': `"Password" cannot be empty`,
-               'any.required': `"Password" is required`
-            })
-            .label('Password')
-      });
-   }
+   state = {
+      data: { email: '', password: '' },
+      errors: {}
+   };
+
+   schema = Joi.object({
+      email: Joi
+         .string()
+         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+         .required()
+         .messages({
+            'string.email': `"Email" must be valid. ex: 'name@domain.com'`,
+            'string.empty': `"Email" cannot be empty`,
+            'any.required': `"Email" is required`
+         })
+         .label('Email'),
+      password: Joi
+         .string()
+         .required()
+         .messages({
+            'string.empty': `"Password" cannot be empty`,
+            'any.required': `"Password" is required`
+         })
+         .label('Password')
+   });
 
 
    modal = React.createRef();
@@ -42,46 +40,57 @@ class LoginForm extends Form {
       $(this.modal.current).modal('show');
    }
 
-   handleModalClose = () => {
-      this.props.history.push('/');
-   }
-
-   doSubmit = () => {
-      console.log('Submitted');
+   doSubmit = async() => {
+      try {
+      const { data } = this.state;
+      const res = await login(data.email, data.password);
+       if (res) {
+         $(this.modal.current).modal('hide');
+         this.props.onModalClose();
+         }
+       }
+       catch (ex) {
+          if (ex.response && ex.response.status === 400) {
+             const errors = {...this.state.errors};
+             errors.email = ex.response.data;
+             this.setState({errors});
+          }
+       }
    };
 
    render() {
       return (
-            <div 
-               ref={this.modal}
-               className="modal" tabIndex="-1" 
-               aria-labelledby="LoginModal" 
-               aria-hidden="true"
-               data-backdrop="static" 
-               data-keyboard="false">
+         <div
+            ref={this.modal}
+            className="modal" tabIndex="-1"
+            aria-labelledby="LoginModal"
+            aria-hidden="true"
+            data-backdrop="static"
+            data-keyboard="false">
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                  <h5 className="modal-title">Login</h5>
-                  <button 
-                     type="button" 
-                     className="close" 
-                     onClick={this.handleModalClose} 
-                     data-dismiss="modal" 
-                     aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
+                     <h5 className="modal-title">Login</h5>
+                     <button
+                        type="button"
+                        className="close"
+                        name='Login'
+                        onClick={this.props.onModalClose}
+                        data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
                   </div>
-                        <form onSubmit={this.handlesubmit} noValidate>
-                  <div className="modal-body">
-                           {this.renderInput('email', 'Email')}
-                           {this.renderInput('password', 'Password', 'password')}
-                           {this.renderButton('Login')}
-                  </div>
-                        </form>
+                  <form onSubmit={this.handlesubmit} noValidate>
+                     <div className="modal-body">
+                        {this.renderInput('email', 'Email')}
+                        {this.renderInput('password', 'Password', 'password')}
+                        {this.renderButton('Login')}
+                     </div>
+                  </form>
                </div>
             </div>
-            </div>
+         </div>
       )
    }
 }
