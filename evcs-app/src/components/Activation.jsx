@@ -2,12 +2,15 @@ import React from 'react';
 import $ from 'jquery';
 import Joi from 'joi';
 import Form from './common/Form';
+import Modal from './common/Modal';
 
 class Activation extends Form {
    state = {
-      data: { code: ''},
+      data: { code: '' },
       errors: {}
    };
+
+   modalRef = createRef();
 
    schema = Joi.object({
       code: Joi
@@ -24,51 +27,25 @@ class Activation extends Form {
          .label('Activation Code'),
    });
 
-   modal = React.createRef();
-
-   componentDidMount() {
-      $(this.modal.current).modal('show');
-   };
-
    doSubmit = () => {
-     console.log('activate');
-
+      console.log('activate');
    };
 
-  render() {
-  return ( 
-         <div
-            ref={this.modal}
-            className="modal" tabIndex="-1"
-            aria-labelledby="activateModal"
-            aria-hidden="true"
-            data-backdrop="static"
-            data-keyboard="false">
-            <div className="modal-dialog">
-               <div className="modal-content">
-                  <div className="modal-header">
-                     <h5 className="modal-title">Please enter outlet code to activate</h5>
-                     <button
-                        type="button"
-                        className="close"
-                        name='activate'
-                        onClick={this.props.onModalClose}
-                        data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                  <form onSubmit={this.handlesubmit} noValidate>
-                     <div className="modal-body">
-                        {this.renderInput('code', 'Activation Code', 'code')}
-                        {this.renderButton('Activate')}
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-   );
-  }
+   render() {
+      return (
+         <Modal
+            ref={this.modalRef}
+            title='Please enter outlet code to activate'
+            label='activateModal'
+            name='activate'
+            onModalClose={this.props.onModalClose}>
+            <form onSubmit={this.handlesubmit} noValidate>
+               {this.renderInput('code', 'Activation Code', 'code')}
+               {this.renderButton('Activate')}
+            </form>
+         </Modal>
+      );
+   }
 }
- 
+
 export default Activation;

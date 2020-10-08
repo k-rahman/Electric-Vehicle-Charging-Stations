@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import Joi from 'joi';
 import $ from 'jquery';
 import { toast } from 'react-toastify';
 import { register } from '../services/userService';
+import Modal from './common/Modal';
 import Form from './common/Form';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,6 +18,8 @@ class Register extends Form {
       },
       errors: {}
    };
+
+  modalRef = createRef();
 
    schema = Joi.object({
       name: Joi
@@ -56,17 +59,11 @@ class Register extends Form {
          .label('Confirm Password')
    });
 
-   modal = React.createRef();
-
-   componentDidMount() {
-      $(this.modal.current).modal('show');
-   }
-
    doSubmit = async () => {
       try {
          const res = await register(this.state.data);
          if (res) {
-            $(this.modal.current).modal('hide');
+            $(this.modalRef.current).modal('hide');
             this.props.onModalClose();
             this.successNote();
          }
@@ -87,39 +84,22 @@ class Register extends Form {
 
    render() {
       return (
-         <div
-            ref={this.modal}
-            className="modal" tabIndex="-1"
-            aria-labelledby="RegisterModal"
-            aria-hidden="true"
-            data-backdrop="static"
-            data-keyboard="false">
-            <div className="modal-dialog">
-               <div className="modal-content">
-                  <div className="modal-header">
-                     <h5 className="modal-title">Register</h5>
-                     <button
-                        type="button"
-                        className="close"
-                        name='Register'
-                        onClick={this.props.onModalClose}
-                        data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                  <form onSubmit={this.handlesubmit} noValidate>
-                     <div className="modal-body">
-                        {this.renderInput('name', 'Name', 'name')}
-                        {this.renderInput('email', 'Email', 'email')}
-                        {this.renderInput('password', 'Password', 'password')}
-                        {this.renderInput('confirmPassword', 'Renter Password', 'password')}
-                        {this.renderButton('Register')}
-                     </div>
-                  </form>
+         <Modal
+         ref={this.modalRef}
+            title='Register'
+            name='Register'
+            label='RegisterModal'
+            onModalClose={this.props.onModalClose}>
+            <form onSubmit={this.handlesubmit} noValidate>
+               <div className="modal-body">
+                  {this.renderInput('name', 'Name', 'name')}
+                  {this.renderInput('email', 'Email', 'email')}
+                  {this.renderInput('password', 'Password', 'password')}
+                  {this.renderInput('confirmPassword', 'Renter Password', 'password')}
+                  {this.renderButton('Register')}
                </div>
-            </div>
-         </div>
+            </form>
+         </Modal>
       );
    }
 }

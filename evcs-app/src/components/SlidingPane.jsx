@@ -4,7 +4,17 @@ import LocationCard from './LocationCard';
 import StationCard from './StationCard';
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
-const SlidingPane = ({ selectedLocation, onLocationChange, stations, status, checkStatus, onChargingClick, match }) => {
+const SlidingPane = (props) => {
+
+  const {
+    selectedLocation,
+    onLocationChange,
+    stations,
+    status,
+    checkStatus,
+    onChargingClick,
+    match
+  } = props;
 
   useEffect(() => {
     onLocationChange(match.params.id);
