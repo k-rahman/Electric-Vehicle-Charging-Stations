@@ -8,6 +8,7 @@ import Map from './components/Map';
 import SlidingPane from './components/SlidingPane';
 import LoginForm from './components/LoginForm';
 import Register from './components/Register';
+import Activation from './components/Activation';
 import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -15,6 +16,7 @@ import './App.css';
 const App = () => {
    const [showLogin, setShowLogin] = useState(false);
    const [showRegister, setShowRegister] = useState(false);
+   const [activate, setActivate] = useState(false);
    const [loggedIn, setLoggedIn] = useState(null);
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
@@ -28,7 +30,9 @@ const App = () => {
          setLocations(data);
       }
       fetchLocations();
+
       logIn();
+
       history.listen(handleRouterChange)
    }, []);
 
@@ -55,11 +59,20 @@ const App = () => {
          localStorage.removeItem('name')
          window.location.reload();
       }
+      if (link.name === 'activate' && loggedIn)
+      {
+         console.log('Activating');
+         setActivate(true);
+      }else{
+         toast.dark('You need to log in before you can use the service.');
+      }
    };
 
    const handleModalClose = () => {
+      console.log(activate)
       setShowLogin(false);
       setShowRegister(false);
+      setActivate(false);
    };
 
    const handlePopupClose = () => {
@@ -81,38 +94,53 @@ const App = () => {
    }
 
    const logIn = () => {
-      const user = localStorage.getItem('name');
-      setLoggedIn(user);
+      if (!loggedIn) {
+         toast.dark('Successfully logged in!');
+      }
+         const user = localStorage.getItem('name');
+         setLoggedIn(user);
    };
 
    return (
       <>
-         <ToastContainer />
-         <NavBar 
-            siteName='EVCS' 
+         <ToastContainer
+            autoClose={2000}
+            hideProgressBar={true}
+            pauseOnHover={false}
+            pauseOnFocusLose={false}
+            closeButton={false}
+            limit={1}
+         />
+         <NavBar
+            siteName='EVCS'
             user={loggedIn}
-            onLinkClick={handleModalOpen} 
-            />
-         <Route
-            path={['/locations/:id','/']}
-            render={props =>
-               <Map
-                  locations={locations}
-                  selectedLocation={selectedLocation}
-                  onPopupClose={handlePopupClose}
-                  {...props} />} />
-         <Route
-            path={'/locations/:id'}
-            render={props =>
-               <SlidingPane
-                  selectedLocation={selectedLocation}
-                  onLocationChange={handleLocationChange}
-                  stations={stations}
-                  status={outletsStatus}
-                  checkStatus={checkOutletStatus}
-                  {...props} />} />
+            onLinkClick={handleModalOpen}
+         />
+         <Switch>
+            <Route
+               path={['/locations/:id', '/']} exact
+               render={props =>
+                  <>
+                     <Map
+                        locations={locations}
+                        selectedLocation={selectedLocation}
+                        onPopupClose={handlePopupClose}
+                        {...props} />
+
+                     <SlidingPane
+                        selectedLocation={selectedLocation}
+                        onLocationChange={handleLocationChange}
+                        stations={stations}
+                        status={outletsStatus}
+                        checkStatus={checkOutletStatus}
+                        onChargingClick={handleModalOpen}
+                        {...props} />
+                  </>} />
+            <Route path='*' component={NotFound} />
+         </Switch>
          {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
+         {(activate) && <Activation onModalClose={handleModalClose} />}
          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
       </>
    );
