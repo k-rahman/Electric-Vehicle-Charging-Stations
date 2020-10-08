@@ -15,7 +15,6 @@ const StationCard = (props) => {
 
   useEffect(() => {
     checkStatus(outlets);
-    console.log('Station send to get outlet status');
   }, []);
 
   const pluralOrSingular = counter => {

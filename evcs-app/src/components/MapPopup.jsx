@@ -3,7 +3,6 @@ import { Popup } from 'react-map-gl';
 import MapCard from './common/MapCard';
 
 const MapPopup = ({ selectedLocation, onClose }) => {
-  console.log('MapPopup ', selectedLocation);
   return (
     selectedLocation &&
     <Popup

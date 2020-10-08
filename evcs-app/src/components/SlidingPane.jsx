@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Pane from 'react-sliding-pane';
 import LocationCard from './LocationCard';
 import StationCard from './StationCard';

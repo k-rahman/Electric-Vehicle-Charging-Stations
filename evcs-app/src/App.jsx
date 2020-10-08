@@ -16,7 +16,7 @@ import './App.css';
 const App = () => {
    const [showLogin, setShowLogin] = useState(false);
    const [showRegister, setShowRegister] = useState(false);
-   const [activate, setActivate] = useState(false);
+   const [showActivate, setShowActivate] = useState(false);
    const [loggedIn, setLoggedIn] = useState(null);
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
@@ -54,25 +54,24 @@ const App = () => {
 
    const handleModalOpen = ({ currentTarget: link }) => {
       if (link.name === 'Login') setShowLogin(true);
-      if (link.name === 'Register') setShowRegister(true);
-      if (link.name === 'Logout') {
+      else if (link.name === 'Register') setShowRegister(true);
+      else if (link.name === 'activate' && loggedIn)
+         setShowActivate(true);
+      else if (link.name === 'activate' && !loggedIn)
+         toast.dark('You need to be logged in to use the service.');
+
+
+      // Logout maybe move to own function
+      else if (link.name === 'Logout') {
          localStorage.removeItem('name')
          window.location.reload();
-      }
-      if (link.name === 'activate' && loggedIn)
-      {
-         console.log('Activating');
-         setActivate(true);
-      }else{
-         toast.dark('You need to log in before you can use the service.');
       }
    };
 
    const handleModalClose = () => {
-      console.log(activate)
       setShowLogin(false);
       setShowRegister(false);
-      setActivate(false);
+      setShowActivate(false);
    };
 
    const handlePopupClose = () => {
@@ -94,17 +93,17 @@ const App = () => {
    }
 
    const logIn = () => {
-      if (!loggedIn) {
-         toast.dark('Successfully logged in!');
-      }
-         const user = localStorage.getItem('name');
-         setLoggedIn(user);
+      // if (!loggedIn) {
+      //    toast.dark('Successfully logged in!');
+      // }
+      const user = localStorage.getItem('name');
+      setLoggedIn(user);
    };
 
    return (
       <>
          <ToastContainer
-            autoClose={2000}
+            autoClose={3000}
             hideProgressBar={true}
             pauseOnHover={false}
             pauseOnFocusLose={false}
@@ -140,7 +139,7 @@ const App = () => {
          </Switch>
          {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
-         {(activate) && <Activation onModalClose={handleModalClose} />}
+         {(showActivate) && <Activation onModalClose={handleModalClose} />}
          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
       </>
    );
