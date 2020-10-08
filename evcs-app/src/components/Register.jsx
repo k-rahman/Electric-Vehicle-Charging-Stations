@@ -32,9 +32,9 @@ class Register extends Form {
          .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
          .required()
          .messages({
-            'string.email': `"Email" must be valid. ex: 'name@domain.com'`,
-            'string.empty': `"Email" cannot be empty`,
-            'any.required': `"Email" is required`
+            'string.email': `"Email" must be valid. ex: 'name@domain.com.'`,
+            'string.empty': `"Email" cannot be empty.`,
+            'any.required': `"Email" is required.`
          })
          .label('Email'),
       password: Joi
@@ -42,16 +42,16 @@ class Register extends Form {
          .min(5)
          .required()
          .messages({
-            'string.empty': `"Password" cannot be empty`,
-            'any.required': `"Password" is required`
+            'string.empty': `"Password" cannot be empty.`,
+            'any.required': `"Password" is required.`
          })
          .label('Password'),
       confirmPassword: Joi
          .string()
          .valid(Joi.ref('password'))
          .messages({
-            'string.empty': `"Password" cannot be empty`,
-            'any.only': `"Password" must match`
+            'string.empty': `"Password" cannot be empty.`,
+            'any.only': `"Password" must match.`
          })
          .label('Confirm Password')
    });

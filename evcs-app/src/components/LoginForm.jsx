@@ -1,9 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import Joi from 'joi';
-import 'bootstrap/js/dist/modal.js';
 import { login } from '../services/authService';
 import Form from './common/Form';
+import 'bootstrap/js/dist/modal.js';
 
 class LoginForm extends Form {
 
@@ -32,7 +32,6 @@ class LoginForm extends Form {
          })
          .label('Password')
    });
-
 
    modal = React.createRef();
 

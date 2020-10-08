@@ -27,7 +27,7 @@ const NavBar = ({ siteName = '', Links = [], onLinkClick, user }) => {
               <button
                 className='btn border-info border rounded-sm mx-1 text-white'
                 name='user'
-                onClick={onLinkClick}>{user}</button>
+                onClick={onLinkClick}>{user}'s history</button>
               <button
                 className='btn border-info border rounded-sm mx-1 text-white'
                 name='Logout'

@@ -2,7 +2,15 @@ import React, { useEffect } from 'react';
 import OutletCard from './OutletCard';
 import styles from '../assets/css/station.module.css';
 
-const StationCard = ({ station, stationNumber, outlets, status, checkStatus  }) => {
+const StationCard = (props) => {
+  const {
+    station,
+    stationNumber,
+    outlets,
+    status,
+    checkStatus,
+    onChargingClick
+  }=props;
   const { code, type } = station;
 
   useEffect(() => {
@@ -42,8 +50,11 @@ const StationCard = ({ station, stationNumber, outlets, status, checkStatus  }) 
             <div>
               <button
                 id="charging-btn"
+                name="activate"
                 disabled={status > 1 ? true : false}
-                className={`${styles['charging-btn']} btn`}>Start charging</button>
+                className={`${styles['charging-btn']} btn`}
+                onClick={onChargingClick}
+                >Start charging</button>
             </div>
           </div>
         </li>
