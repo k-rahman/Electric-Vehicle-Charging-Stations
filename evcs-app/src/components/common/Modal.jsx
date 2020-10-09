@@ -27,6 +27,7 @@ const Modal = React.forwardRef ((props, ref) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>
+            {props.showCloseButton && 
             <button
               type="button"
               className="close"
@@ -36,6 +37,7 @@ const Modal = React.forwardRef ((props, ref) => {
               aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+}
           </div>
           <div className="modal-body">
             {children}

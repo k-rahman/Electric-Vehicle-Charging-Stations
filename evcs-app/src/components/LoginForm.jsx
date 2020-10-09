@@ -63,7 +63,8 @@ class LoginForm extends Form {
             title='Login'
             name='Login'
             label='LoginModal'
-            onModalClose={this.props.onModalClose}>
+            onModalClose={this.props.onModalClose}
+            showCloseButton={true}>
             <form onSubmit={this.handlesubmit} noValidate>
                {this.renderInput('email', 'Email')}
                {this.renderInput('password', 'Password', 'password')}

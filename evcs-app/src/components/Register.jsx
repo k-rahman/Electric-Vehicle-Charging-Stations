@@ -89,7 +89,9 @@ class Register extends Form {
             title='Register'
             name='Register'
             label='RegisterModal'
-            onModalClose={this.props.onModalClose}>
+            onModalClose={this.props.onModalClose}
+            showCloseButton={true}
+            >
             <form onSubmit={this.handlesubmit} noValidate>
                <div className="modal-body">
                   {this.renderInput('name', 'Name', 'name')}
