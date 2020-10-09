@@ -1,4 +1,9 @@
 import React, { Component, createRef } from 'react';
+import $ from 'jquery';
+import { saveChargeInfo } from './../../services/historyService';
+import { updateOutletStatus, getOutletById } from './../../services/outletService';
+import { convertTime } from '../../utils/dateTimeUtils';
+import { toast } from 'react-toastify';
 import Modal from './Modal';
 
 class Monitor extends Component {
@@ -10,6 +15,7 @@ class Monitor extends Component {
     secs: 0,
     cost: 0,
     energy: 0,
+    showFinalResult: false,
   }
 
   modalRef = createRef();
@@ -19,6 +25,7 @@ class Monitor extends Component {
   }
 
   start = () => {
+    this.chargeTimeDate = new Date();
     this.startTime = Date.now();
     this.timer = setInterval(this.update, 1000);
   }
@@ -27,7 +34,7 @@ class Monitor extends Component {
     const delta = Date.now() - this.startTime;
     const timeElapsed = this.state.timeElapsed + delta;
 
-    const timeUnits = this.convertTime(timeElapsed);
+    const timeUnits = convertTime(timeElapsed);
 
     const energy = this.calculateEnergy(timeElapsed);
     const cost = this.claculateCost(timeElapsed, energy);
@@ -51,8 +58,25 @@ class Monitor extends Component {
       });
   }
 
-  terminate = () => {
-
+  terminate = async () => {
+    try {
+      const { data: success } = await saveChargeInfo(this.DataToSave());
+      if (success) {
+        const { status } = await updateOutletStatus(this.props.outlet);
+        if (status === 204) {
+          this.setState({ showFinalResult: true });
+          const {data: outlet} = await getOutletById(this.props.outlet.id);
+          this.props.checkStatus(outlet);
+          console.log('check status called')
+        }
+      }
+    }
+    catch (ex) {
+      if (ex.response && (ex.response.status === 400 || ex.response.status === 500)) {
+        this.setState({ showFinalResult: false });
+        toast.dark('Something went wrong try again.');
+      }
+    }
   }
 
   claculateCost = (timeElapsed, energy) => {
@@ -65,12 +89,6 @@ class Monitor extends Component {
   calculateEnergy = timeElapsed => {
     return Math.floor((this.props.outlet.power * (timeElapsed / (1000 * 60 * 60)) % 24) * 100) / 100;
   }
-
-  convertTime = timeElapsed => ({
-     hrs: Math.floor((timeElapsed / (1000 * 60 * 60)) % 24),
-     mins: Math.floor((timeElapsed / 1000 / 60) % 60),
-     secs: Math.floor((timeElapsed / 1000) % 60),
-   })
 
   addZero = (width, time) => {
     if (time.toString().length === width) {
@@ -97,28 +115,62 @@ class Monitor extends Component {
     return chargeButton;
   }
 
-  render() {
+  DataToSave = () => ({
+    time: this.chargeTimeDate.toISOString().slice(0, 19).replace('T', ' '),
+    duration: Math.floor(this.state.timeElapsed / 1000),
+    energy: this.state.energy,
+    cost: this.state.cost,
+    user: localStorage.getItem('userId'),
+    location: this.props.selectedLocation.id,
+  });
+
+  monitorState = () => {
     const { hrs, mins, secs, cost, energy } = this.state;
+
+    if (!this.state.showFinalResult) {
+      return (
+        <>
+          <div>
+            <span>{this.addZero(2, hrs)} : </span>
+            <span>{this.addZero(2, mins)} : </span>
+            <span>{this.addZero(2, secs)}</span>
+          </div>
+          <div>
+            <span>cost {cost.toFixed(2)}</span>
+          </div>
+          <div>
+            <span>energy {energy.toFixed(2)}</span>
+          </div>
+          {this.chargingControls()}
+        </>
+      )
+    }
+
+    return (
+      <>
+        <div>Final cost {cost.toFixed(2)}</div>
+        <button
+          name='closeMonitor'
+          onClick={this.handleMonitorClose}>Close</button>
+      </>
+    )
+  }
+
+  handleMonitorClose = () => {
+
+    $(this.modalRef.current).modal('hide');
+    this.props.onMonitorClose();
+  }
+
+  render() {
     return (
       <Modal
         ref={this.modalRef}
-        title='Info'
+        title='Charging screen'
         label='monitorModal'
         name='monitor'
-        onModalClose={this.props.onModalClose}
         showCloseButton={false}>
-        <div>
-          <span>{this.addZero(2, hrs)} : </span>
-          <span>{this.addZero(2, mins)} : </span>
-          <span>{this.addZero(2, secs)}</span>
-        </div>
-        <div>
-          <span>cost {cost.toFixed(2)}</span>
-        </div>
-        <div>
-          <span>energy {energy.toFixed(2)}</span>
-        </div>
-        {this.chargingControls()}
+        {this.monitorState()}
       </Modal>
     );
   }
