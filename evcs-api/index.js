@@ -8,6 +8,7 @@ const stations = require('./routes/stations');
 const outlets = require('./routes/outlets');
 const auth = require('./routes/auth');
 const activate = require('./routes/activate');
+const history = require('./routes/history');
 const app = express();
 
 const PORT = process.env.PORT || 3200;
@@ -19,10 +20,11 @@ app.use(cors());
 
 app.use('/api/locations', locations);
 app.use('/api/locations/stations', stations);
-app.use('/api/locations/stations/outlets', outlets);
+app.use('/api/locations/:station?/outlets', outlets);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/activate', activate);
+app.use('/api/history', history);
 
 /* DB init */
 // Promise.all(
