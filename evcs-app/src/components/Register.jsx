@@ -19,7 +19,7 @@ class Register extends Form {
       errors: {}
    };
 
-  modalRef = createRef();
+   modalRef = createRef();
 
    schema = Joi.object({
       name: Joi
@@ -85,13 +85,13 @@ class Register extends Form {
    render() {
       return (
          <Modal
-         ref={this.modalRef}
+            ref={this.modalRef}
             title='Register'
             name='Register'
             label='RegisterModal'
             onModalClose={this.props.onModalClose}
             showCloseButton={true}
-            >
+         >
             <form onSubmit={this.handlesubmit} noValidate>
                <div className="modal-body">
                   {this.renderInput('name', 'Name', 'name')}
