@@ -41,6 +41,7 @@ class LoginForm extends Form {
          const { data } = this.state;
          const { data: user } = await login(data.email, data.password);
          localStorage.setItem('name', user[0].name);
+         localStorage.setItem('userId', user[0].id);
          window.location.reload();
          if (user) {
             $(this.modalRef.current).modal('hide');
