@@ -10,7 +10,7 @@ const StationCard = (props) => {
     status,
     checkStatus,
     onChargingClick
-  }=props;
+  } = props;
   const { code, type } = station;
 
   useEffect(() => {
@@ -26,20 +26,20 @@ const StationCard = (props) => {
     <div className={`${styles.card} card shadow-lg`}>
       <div className={`${styles['card-header']} row`}>
         <div className='col-7'>Station {stationNumber}
-          <br/><small>{type} charging</small></div>
-          <div className='col-5 text-center'>Station Code <br/><strong>{code}</strong>
-          </div>
+          <br /><small>{type} charging</small></div>
+        <div className='col-5 text-center'>Station Code <br /><strong>{code}</strong>
+        </div>
       </div>
-      
+
       <ul className="list-group list-group-flush">
         <li className='list-group-item'>
-<div className='d-flex justify-content-center'>
-        <span className={`${styles.badge}`}>
-          {status} outlet{pluralOrSingular(status)} available
+          <div className='d-flex justify-content-center'>
+            <span className={`${styles.badge}`}>
+              {status} outlet{pluralOrSingular(status)} available
         </span>
 
-      </div>
-</li>
+          </div>
+        </li>
         <li className="list-group-item">
           {outlets.map(outlet =>
             <OutletCard key={outlet.id} outlet={outlet} />)}
@@ -53,7 +53,7 @@ const StationCard = (props) => {
                 disabled={status > 1 ? true : false}
                 className={`${styles['charging-btn']} btn`}
                 onClick={onChargingClick}
-                >Start charging</button>
+              >Click to start</button>
             </div>
           </div>
         </li>

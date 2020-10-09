@@ -9,6 +9,7 @@ import SlidingPane from './components/SlidingPane';
 import LoginForm from './components/LoginForm';
 import Register from './components/Register';
 import Activation from './components/Activation';
+import Monitor from './components/common/Monitor';
 import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -21,6 +22,7 @@ const App = () => {
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
    const [stations, setStations] = useState([]);
+   const [outletInUse, setOutletInUse] = useState(null);
    const [outletsStatus, setOutletsStatus] = useState(0);
    const history = useHistory();
 
@@ -88,9 +90,16 @@ const App = () => {
       for (let outlet of outlets) {
          if (outlet.status === 'Available') {
             setOutletsStatus(1);
+         }else{
+            setOutletsStatus(0);
          }
       }
-   }
+   };
+
+   const startCharging = outlet => {
+      setShowActivate(false);
+      setOutletInUse(outlet);
+   };
 
    const logIn = () => {
       // if (!loggedIn) {
@@ -139,7 +148,18 @@ const App = () => {
          </Switch>
          {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
-         {(showActivate) && <Activation onModalClose={handleModalClose} />}
+         {(showActivate) && 
+            <Activation 
+               onModalClose={handleModalClose} 
+               checkStatus={checkOutletStatus} 
+               startCharging={startCharging} />
+         }
+         {(outletInUse) && 
+            <Monitor 
+               onModalClose={handleModalClose} 
+               outlet={outletInUse} />
+         }
+
          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
       </>
    );
