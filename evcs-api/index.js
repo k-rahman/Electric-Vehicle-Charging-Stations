@@ -6,7 +6,8 @@ const locations = require('./routes/locations');
 const users = require('./routes/users');
 const stations = require('./routes/stations');
 const outlets = require('./routes/outlets');
-const auth = require('./routes/auth.js');
+const auth = require('./routes/auth');
+const activate = require('./routes/activate');
 const app = express();
 
 const PORT = process.env.PORT || 3200;
@@ -21,7 +22,7 @@ app.use('/api/locations/stations', stations);
 app.use('/api/locations/stations/outlets', outlets);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
-
+app.use('/api/activate', activate);
 
 /* DB init */
 // Promise.all(
