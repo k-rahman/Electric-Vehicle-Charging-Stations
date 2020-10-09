@@ -1,4 +1,5 @@
 import React, {createRef} from 'react';
+import {activate} from '../services/activateService';
 import $ from 'jquery';
 import Joi from 'joi';
 import Form from './common/Form';
@@ -27,8 +28,23 @@ class Activation extends Form {
          .label('Activation Code'),
    });
 
-   doSubmit = () => {
-      console.log('activate');
+   doSubmit = async () => {
+      try {
+         const {data} = await activate(this.state.data.code);
+         if (data)
+         {
+            $(this.modalRef.current).modal('hide');
+            this.props.checkStatus(data);
+            this.props.startCharging(data[0]);
+            this.props.onModalClose();
+         }
+      }catch(ex){
+         if (ex.response && ex.response.status === 400){
+            const errors = {...this.state.errors};
+            errors.code = ex.response.data;
+            this.setState({errors});
+         }
+      }
    };
 
    render() {
@@ -38,7 +54,9 @@ class Activation extends Form {
             title='Please enter outlet code to activate'
             label='activateModal'
             name='activate'
-            onModalClose={this.props.onModalClose}>
+            onModalClose={this.props.onModalClose}
+            showCloseButton={true}
+            >
             <form onSubmit={this.handlesubmit} noValidate>
                {this.renderInput('code', 'Activation Code', 'code')}
                {this.renderButton('Activate')}
