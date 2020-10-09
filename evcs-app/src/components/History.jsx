@@ -5,6 +5,7 @@ import Table from '../components/common/Table';
 import SearchBox from './common/SearchBox';
 
 const History = (props) => {
+  const userName = localStorage.getItem('name');
   const columns = [{
     path: 'date',
     label: 'Date',
@@ -41,7 +42,7 @@ const History = (props) => {
   return (
     <Modal
       ref={modalRef}
-      title='User History'
+      title={`${userName}'s History`}
       name='History'
       label='HistoryModal'
       onClose={onModalClose}
@@ -49,7 +50,7 @@ const History = (props) => {
         <SearchBox
           value={searchQuery}
           onChange={onValueChange}
-          placeholder='Search by location name...' 
+          placeholder='Search by location...' 
           className='sticky-top'
           />
       <Table
