@@ -9,6 +9,7 @@ try {
     user: config.get('database.user'),
     password: config.get('database.password'),
     database: config.get('database.name'),
+    multipleStatements: true
   });
 
 } catch (error) {
