@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = ({ siteName = '', Links = [], onLinkClick, user }) => {
+const NavBar = ({ siteName = '', onHistoryClick, onLinkClick, user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <Link className="navbar-brand" to='/'>{siteName}</Link>
@@ -27,7 +27,7 @@ const NavBar = ({ siteName = '', Links = [], onLinkClick, user }) => {
               <button
                 className='btn border-info border rounded-sm mx-1 text-white'
                 name='user'
-                onClick={onLinkClick}>{user}'s history</button>
+                onClick={onHistoryClick}>{user}'s history</button>
               <button
                 className='btn border-info border rounded-sm mx-1 text-white'
                 name='Logout'
