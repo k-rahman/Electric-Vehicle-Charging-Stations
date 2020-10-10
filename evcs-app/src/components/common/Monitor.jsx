@@ -20,6 +20,10 @@ class Monitor extends Component {
 
   modalRef = createRef();
 
+  componentDidMount() {
+    this.start();
+  }
+
   componentWillUnmount() {
     clearInterval(this.update);
   }
@@ -28,6 +32,7 @@ class Monitor extends Component {
     this.chargeTimeDate = new Date();
     this.startTime = Date.now();
     this.timer = setInterval(this.update, 1000);
+    this.setState({isRunning: true});
   }
 
   update = () => {
@@ -60,7 +65,8 @@ class Monitor extends Component {
 
   terminate = async () => {
     try {
-      const { data: success } = await saveChargeInfo(this.DataToSave());
+      const { data: success } = 
+        await saveChargeInfo(this.DataToSave());
       if (success) {
         const { status } = await updateOutletStatus(this.props.outlet);
         if (status === 204) {
@@ -99,11 +105,13 @@ class Monitor extends Component {
   }
 
   chargingControls = () => {
-    const { isRunning, secs } = this.state;
-    let text = !isRunning ? 'Start Charging' : 'Stop Charging';
-    let chargeButton = <button className='btn btn-danger' onClick={this.toggle}>{text}</button>
+    const { isRunning } = this.state;
+    let chargeButton = 
+    <button 
+      className='btn btn-danger' 
+      onClick={this.toggle}>{isRunning}StopCharging</button>
 
-    if (!isRunning && secs > 0) {
+    if (!isRunning) {
       chargeButton =
         <>
           <div>Are you sure you want to stop charging?</div>
