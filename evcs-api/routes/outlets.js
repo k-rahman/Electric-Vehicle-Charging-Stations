@@ -1,14 +1,7 @@
 const express = require('express');
-const router = express.Router();
-const db = require('../db/index');
+const router = express.Router({mergeParams: true});
 
-// get all outlets
-router.get('/', (req, res) => {
-  db.query('SELECT * FROM outlets')
-    .then(results => {
-      res.send(results);
-    })
-});
+const db = require('../db/index');
 
 //get out by id
 router.get('/:id', (req, res) => {
@@ -29,15 +22,15 @@ router.get('/:id', (req, res) => {
 
 // get outlet by station id
 router.get('/', (req, res) => {
-  const { station } = req.params;
+  const { stations } = req.params;
 
   db.query('SELECT o.id, o.code,  o.status, o.power, o.station, c.name, c.img, p.payment, p.unit'
     + ' FROM outlets as o'
     + ' JOIN stations as s ON s.id = o.station'
     + ' JOIN connectors as c ON c.id = o.connector'
     + ' JOIN prices as p ON p.id = o.price'
-    + ' WHERE s.id = ?'
-    + ' GROUP BY o.id', station)
+    + ' WHERE o.station = ?'
+    + ' GROUP BY o.id', stations)
     .then(results => {
       res.send(results);
     })

@@ -1,7 +1,7 @@
 import http from './httpService';
 
-const stationsAPI = process.env.REACT_APP_STATIONS;
+const locationAPI = process.env.REACT_APP_LOCATIONS;
 
 export function getStationsByLocationId(locationId) {
-  return http.get(`${stationsAPI}/${locationId}`);
+  return http.get(`${locationAPI}/${locationId}/stations`);
 }
