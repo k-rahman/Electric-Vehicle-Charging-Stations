@@ -37,7 +37,9 @@ body {
 }
 
 thead {
-  background-color: #2B7A78;
+  background-color: #FEFFFF;
+  color: #17252A;
+  border: 1px solid;
 }
 
 .navbar {

@@ -15,6 +15,9 @@ const Modal = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     $(ref.current).modal('show');
+    $(ref.current).modal({
+      focus: true
+    });
   }, []);
 
   return (
