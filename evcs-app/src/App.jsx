@@ -56,6 +56,13 @@ const App = () => {
       }
    }, [selectedLocation]);
 
+   useEffect(() => {
+      const filtered = historySearch.filter(h => {
+         return h.name.toLowerCase().includes(searchQuery.toLowerCase())
+      })
+      console.log('filter ', filtered);
+      setUserHistory(filtered);
+   },[searchQuery]);
 
    const handleLocationChange = async locationId => {
       const { data: location } = await getLocationById(locationId);
@@ -144,10 +151,6 @@ const App = () => {
 
   const handleHistorySearch = query => {
       setSearchQuery(query);
-      const filtered = historySearch.filter(h => {
-         return h.name.toLowerCase().includes(searchQuery.toLowerCase())
-      })
-      setUserHistory([...filtered]);
    }
 
    return (

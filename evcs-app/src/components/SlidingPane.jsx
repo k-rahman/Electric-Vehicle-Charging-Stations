@@ -12,7 +12,7 @@ const SlidingPane = (props) => {
     stations,
     status,
     checkStatus,
-    onChargingClick,
+    onStartHereClick,
     match
   } = props;
 
@@ -43,7 +43,7 @@ const SlidingPane = (props) => {
           stationNumber={index + 1}
           checkStatus={checkStatus}
           status={status}
-          onChargingClick={onChargingClick}
+          onStartHereClick={onStartHereClick}
         />))}
     </Pane>
   );
