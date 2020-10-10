@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
+import styles from '../../assets/css/form.module.css';
 
 class Form extends Component {
 
@@ -35,7 +36,7 @@ class Form extends Component {
   renderButton(label) {
     return (
       <button
-        type="submit" className="btn form-control" style={{ backgroundColor: '#00ccb2' }}>{label}</button>
+        type="submit" className={`${styles['submit-btn']} btn form-control`}>{label}</button>
     );
   }
 

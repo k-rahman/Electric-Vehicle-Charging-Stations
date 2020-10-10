@@ -26,16 +26,15 @@ const Modal = React.forwardRef((props, ref) => {
       data-backdrop="static"
       data-keyboard="false">
       <div 
-        styles={styles['modal-dialog']}
         className=
-          "modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+          "modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>
             {showCloseButton &&
               <button
                 type="button"
-                className="close"
+                className="close text-white"
                 name={name}
                 onClick={onModalClose}
                 data-dismiss="modal"

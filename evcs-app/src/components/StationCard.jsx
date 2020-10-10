@@ -9,8 +9,13 @@ const StationCard = (props) => {
     outlets,
     status,
     checkStatus,
-    onChargingClick
+    onStartHereClick
   } = props;
+
+    //
+  console.log(status);
+  //
+
   const { code, type } = station;
 
   useEffect(() => {
@@ -23,8 +28,8 @@ const StationCard = (props) => {
   };
 
   return (
-    <div className={`${styles.card} card shadow-lg`}>
-      <div className={`${styles['card-header']} row`}>
+    <div className="card shadow-lg mt-1">
+      <div className="card-header row">
         <div className='col-7'>Station {stationNumber}
           <br /><small>{type} charging</small></div>
         <div className='col-5 text-center'>Station Code <br /><strong>{code}</strong>
@@ -34,7 +39,7 @@ const StationCard = (props) => {
       <ul className="list-group list-group-flush">
         <li className='list-group-item'>
           <div className='d-flex justify-content-center'>
-            <span className={`${styles.badge}`}>
+            <span className="badge">
               {status} outlet{pluralOrSingular(status)} available
         </span>
 
@@ -52,7 +57,7 @@ const StationCard = (props) => {
                 name="activate"
                 disabled={status > 1 ? true : false}
                 className={`${styles['charging-btn']} btn`}
-                onClick={onChargingClick}
+                onClick={onStartHereClick}
               >Click to start</button>
             </div>
           </div>

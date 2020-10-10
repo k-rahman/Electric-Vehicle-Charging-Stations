@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = ({ siteName = '', onHistoryClick, onLinkClick, user }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark">
+    <nav className="navbar navbar-expand-lg">
       <Link className="navbar-brand" to='/'>{siteName}</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -13,11 +13,11 @@ const NavBar = ({ siteName = '', onHistoryClick, onLinkClick, user }) => {
           {!user &&
             <>
               <button
-                className='btn border-info border rounded-sm mx-1 text-white'
+                className='btn border rounded-sm mx-1'
                 name='Login'
                 onClick={onLinkClick}>Login</button>
               <button
-                className='btn border-info border rounded-sm mx-1 text-white'
+                className='btn border rounded-sm mx-1'
                 name='Register'
                 onClick={onLinkClick}>Register</button>
             </>
@@ -25,11 +25,11 @@ const NavBar = ({ siteName = '', onHistoryClick, onLinkClick, user }) => {
           {user &&
             <>
               <button
-                className='btn border-info border rounded-sm mx-1 text-white'
+                className='btn border rounded-sm mx-1'
                 name='user'
                 onClick={onHistoryClick}>{user}'s history</button>
               <button
-                className='btn border-info border rounded-sm mx-1 text-white'
+                className='btn border rounded-sm mx-1'
                 name='Logout'
                 onClick={onLinkClick}>Logout</button>
             </>

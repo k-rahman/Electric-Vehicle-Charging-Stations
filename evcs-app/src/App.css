@@ -5,22 +5,68 @@ body {
   text-align: center;
 }
 
+.modal-dialog {
+  max-width: 700px;
+}
+
+.modal-header {
+  background-color: #17252A;
+  color: #FEFFFF;
+}
+
+.modal-body {
+  background-color: #FEFFFF;
+}
+
+.form-control {
+  border: 2px solid #3AAFA9;
+}
+
+.form-control:focus {
+  background-color: #ecf5f4;
+  color: #17252A;
+}
+
+.table {
+  background-color: #17252A;
+  color: #FEFFFF;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #3AAFA9;
+}
+
+thead {
+  background-color: #2B7A78;
+}
+
 .navbar {
-  background-color: #00959a;
+  background-color: #17252A;
   z-index: 3;
 }
 
-.btn:active {
-  color: black !important;
+.navbar-brand {
+  color: #FEFFFF;
 }
 
-.btn:focus{
-  color: black !important;
+.navbar-brand:hover {
+  color: #3AAFA9;
 }
 
-.active-link {
-  color:  black !important;
+.btn {
+  border: 1px solid #3AAFA9;
+  background-color: #17252A;
+  color: #FEFFFF;
 }
+
+.btn:hover {
+  color: #3AAFA9;
+}
+
+.border {
+  border: 1px solid #3AAFA9 !important;
+}
+
 
 .marker-img {
   width: 44px;
@@ -43,6 +89,7 @@ body {
 
 .slide-pane__content {
   padding: 0;
+  margin-top: 40px;
 }
 
 .sliding-pane-overlay.ReactModal__Overlay--after-open {
