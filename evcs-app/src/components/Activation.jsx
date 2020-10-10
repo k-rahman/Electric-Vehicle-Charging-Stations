@@ -29,13 +29,14 @@ class Activation extends Form {
    });
 
    doSubmit = async () => {
+      const { code } = this.state.data;
+      const { id: locationId } = this.props.selectedLocation;
       try {
-         const {data} = await activate(this.state.data.code);
-         if (data)
+         const {data: outlet} = await activate(code, locationId);
+         if (outlet)
          {
             $(this.modalRef.current).modal('hide');
-            this.props.checkStatus(data);
-            this.props.startCharging(data[0]);
+            this.props.onStartCharging(outlet[0]);
             this.props.onModalClose();
          }
       }catch(ex){

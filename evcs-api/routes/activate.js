@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/index');
 
-router.get('/:code', (req, res) => {
-  const { code } = req.params;
+// confirm activation code using query string
+router.get('/', (req, res) => {
+  const { code, locationId } = req.query;
 
-  db.query('SELECT * FROM outlets WHERE code = ?', code)
+  db.query('SELECT o.id, o.status FROM outlets AS o'
+          + ' JOIN stations AS s ON o.station = s.id'
+          + ' WHERE s.location = ? AND code = ?', [locationId, code])
     .then(outlet => {
 
-      if (outlet.length === 0) return res.status(400).send('Activation Code is incorrect, Please try again.');
+      if (outlet.length === 0) return res.status(400).send('Incorrect code, please check your code or select the right location.');
       if (outlet[0].status === 'In use') return res.status(400).send('Outlet is already in use!');
 
       const id = outlet[0].id;
@@ -20,7 +23,7 @@ router.get('/:code', (req, res) => {
         + ' JOIN stations as s ON s.id = o.station'
         + ' JOIN connectors as c ON c.id = o.connector'
         + ' JOIN prices as p ON p.id = o.price'
-        + ' WHERE s.id = ?'
+        + ' WHERE o.id = ?'
         + ' GROUP BY o.id;'
         + ' COMMIT;', [id, id])
         .then(updated => {
@@ -32,7 +35,10 @@ router.get('/:code', (req, res) => {
           res.sendStatus(500)
         });
     })
-    .catch(err => res.sendStatus(500));
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+    });
 
 });
 
