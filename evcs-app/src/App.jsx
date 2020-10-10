@@ -25,12 +25,11 @@ const App = () => {
    const [showActivate, setShowActivate] = useState(false);
    const [loggedIn, setLoggedIn] = useState(null);
    const [locations, setLocations] = useState([]);
+   const [selectedLocation, setSelectedLocation] = useState(null);
    const [stations, setStations] = useState([]);
+   const [outletInUse, setOutletInUse] = useState(null);
    const [userHistory, setUserHistory] = useState([]);
    const [searchQuery, setSearchQuery] = useState('');
-   const [outletInUse, setOutletInUse] = useState(null);
-   const [selectedLocation, setSelectedLocation] = useState(null);
-   const [outletsStatus, setOutletsStatus] = useState(0);
    const history = useHistory();
 
    useEffect(() => {
@@ -54,7 +53,7 @@ const App = () => {
       if (selectedLocation) {
          fetchStations();
       }
-   }, [selectedLocation]);
+   }, [selectedLocation, outletInUse]);
 
    useEffect(() => {
       const filtered = historySearch.filter(h => {
@@ -64,7 +63,7 @@ const App = () => {
       setUserHistory(filtered);
    },[searchQuery]);
 
-   const handleLocationChange = async locationId => {
+   const handleLocationSelect = async locationId => {
       const { data: location } = await getLocationById(locationId);
       setSelectedLocation(location);
    };
@@ -106,19 +105,7 @@ const App = () => {
          setSelectedLocation(null);
    };
 
-   const checkOutletStatus = outlets => {
-      console.log(outlets);
-      for (let outlet of outlets) {
-         if (outlet.status === 'Available') {
-            setOutletsStatus(1);
-            console.log('outlet status updated');
-         } else {
-            setOutletsStatus(0);
-         }
-      }
-   };
-
-   const startCharging = outlet => {
+   const handlestartCharging = outlet => {
       setShowActivate(false);
       setOutletInUse(outlet);
    };
@@ -182,28 +169,31 @@ const App = () => {
 
                      <SlidingPane
                         selectedLocation={selectedLocation}
-                        onLocationChange={handleLocationChange}
                         stations={stations}
-                        status={outletsStatus}
-                        checkStatus={checkOutletStatus}
-                        onStartHereClick={handleModalOpen}
+                        onLocationSelect={handleLocationSelect}
+                        onStartChargingClick={handleModalOpen}
                         {...props} />
                   </>} />
             <Route path='*' component={NotFound} />
          </Switch>
          {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
-         {(showHistory) && <History onModalClose={handleModalClose} data={userHistory} onValueChange={handleHistorySearch} searchQuery={searchQuery}/>}
+         {(showHistory) && 
+            <History 
+               onModalClose={handleModalClose} 
+               data={userHistory} 
+               onValueChange={handleHistorySearch} 
+               searchQuery={searchQuery} />
+         }
          {(showActivate) &&
             <Activation
                onModalClose={handleModalClose}
-               checkStatus={checkOutletStatus}
-               startCharging={startCharging} />
+               onStartCharging={handlestartCharging} 
+               selectedLocation={selectedLocation} />
          }
          {(outletInUse) &&
             <Monitor
                onMonitorClose={handleMonitorClose}
-               checkStatus={checkOutletStatus}
                selectedLocation={selectedLocation}
                outlet={outletInUse} />
          }

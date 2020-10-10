@@ -8,16 +8,14 @@ const SlidingPane = (props) => {
 
   const {
     selectedLocation,
-    onLocationChange,
     stations,
-    status,
-    checkStatus,
-    onStartHereClick,
-    match
+    match,
+    onLocationSelect,
+    onStartChargingClick,
   } = props;
 
   useEffect(() => {
-    onLocationChange(match.params.id);
+    onLocationSelect(match.params.id);
   }, [match.params.id]);
 
   return (
@@ -34,16 +32,13 @@ const SlidingPane = (props) => {
         image={selectedLocation.img}
         name={selectedLocation.name}
         address={selectedLocation.address}
+        onStartChargingClick={onStartChargingClick}
       />
       {stations.map((station, index) => (
         <StationCard
           key={station.id}
           station={station}
-          outlets={station.outlets}
           stationNumber={index + 1}
-          checkStatus={checkStatus}
-          status={status}
-          onStartHereClick={onStartHereClick}
         />))}
     </Pane>
   );
