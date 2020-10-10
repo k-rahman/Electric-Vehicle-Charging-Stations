@@ -45,7 +45,7 @@ const History = (props) => {
       title={`${userName}'s History`}
       name='History'
       label='HistoryModal'
-      onClose={onModalClose}
+      onModalClose={onModalClose}
       showCloseButton={true}>
         <SearchBox
           value={searchQuery}
@@ -56,7 +56,7 @@ const History = (props) => {
       <Table
         columns={columns}
         data={props.data}
-        className='table-hover text-center' />
+        className='table-hover text-center table-striped' />
     </Modal>
   );
 }
