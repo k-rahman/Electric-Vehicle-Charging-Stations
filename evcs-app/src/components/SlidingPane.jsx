@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Pane from 'react-sliding-pane';
-import LocationCard from './LocationCard';
-import StationCard from './StationCard';
+import Location from './Location';
+import Station from './Station';
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
 const SlidingPane = (props) => {
@@ -28,14 +28,15 @@ const SlidingPane = (props) => {
       from='left'
       width='362px'
       hideHeader={true} >
-      <LocationCard
+      <Location
         image={selectedLocation.img}
         name={selectedLocation.name}
         address={selectedLocation.address}
+        stationsCount={stations.length}
         onStartChargingClick={onStartChargingClick}
       />
       {stations.map((station, index) => (
-        <StationCard
+        <Station
           key={station.id}
           station={station}
           stationNumber={index + 1}
