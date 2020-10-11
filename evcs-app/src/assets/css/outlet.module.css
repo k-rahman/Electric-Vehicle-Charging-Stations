@@ -1,0 +1,57 @@
+.plug-code {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: small;
+  font-weight: bold;
+}
+
+.plug-status {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+  margin-top: 1px;
+}
+
+.plug-status-available {
+  background-color: green;
+  border: 1px double #17252A;
+  color: #EFFFFF;
+  width: 65px;
+}
+
+.plug-status-busy {
+  background-color: #e32636;
+  border: 1px double #17252A;
+  color: #FEFFFF;
+  width: 65px;
+}
+
+.plug-img-container {
+  text-align: center;
+}
+
+.plug-img {
+width: 50px;
+height: 50px;
+}
+
+.plug-prop {
+  padding: 0;
+}
+
+.plug-type {
+  font-size: small;
+  font-weight: bold;
+  padding-right: 14px;
+}
+
+.plug-power {
+  font-size: 9px;
+  background-color: #fada5f;
+  border: 1px solid black;
+}
+
+.plug-price {
+  font-size: small;
+}
