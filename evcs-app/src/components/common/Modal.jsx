@@ -8,6 +8,8 @@ const Modal = React.forwardRef((props, ref) => {
     title,
     label,
     name,
+    width,
+    position,
     onModalClose,
     showCloseButton,
     children
@@ -29,9 +31,10 @@ const Modal = React.forwardRef((props, ref) => {
       data-backdrop="static"
       data-keyboard="false">
       <div 
+        style={{maxWidth: `${width}`}}
         className=
-          "modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content">
+          {`modal-dialog ${position} modal-dialog-scrollable`}>
+        <div className="modal-content" style={{border: "2px solid #3AAFA9"}}>
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>
             {showCloseButton &&

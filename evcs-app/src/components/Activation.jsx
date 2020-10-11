@@ -55,6 +55,7 @@ class Activation extends Form {
             title='Please enter outlet code to activate'
             label='activateModal'
             name='activate'
+            position='modal-dialog-centered'
             onModalClose={this.props.onModalClose}
             showCloseButton={true}
             >

@@ -89,6 +89,7 @@ class Register extends Form {
             title='Register'
             name='Register'
             label='RegisterModal'
+            position='modal-dialog-centered'
             onModalClose={this.props.onModalClose}
             showCloseButton={true}
          >

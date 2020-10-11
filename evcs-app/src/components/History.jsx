@@ -45,6 +45,8 @@ const History = (props) => {
       title={`${userName}'s History`}
       name='History'
       label='HistoryModal'
+      width='700px'
+      position='modal-dialog-centered'
       onModalClose={onModalClose}
       showCloseButton={true}>
         <SearchBox

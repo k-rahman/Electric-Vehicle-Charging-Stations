@@ -64,6 +64,7 @@ class LoginForm extends Form {
             title='Login'
             name='Login'
             label='LoginModal'
+            position='modal-dialog-centered'
             onModalClose={this.props.onModalClose}
             showCloseButton={true}>
             <form onSubmit={this.handlesubmit} noValidate>

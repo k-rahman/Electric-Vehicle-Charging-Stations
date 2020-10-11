@@ -5,10 +5,6 @@ body {
   text-align: center;
 }
 
-.modal-dialog {
-  max-width: 700px;
-}
-
 .modal-header {
   background-color: #17252A;
   color: #FEFFFF;
@@ -39,11 +35,11 @@ body {
 thead {
   background-color: #FEFFFF;
   color: #17252A;
-  border: 1px solid;
 }
 
 .navbar {
   background-color: #17252A;
+  border-bottom: 1px double #3AAFA9;
   z-index: 3;
 }
 
