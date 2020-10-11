@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+.numbers {
+  font-weight: bold;
+  font-size: 3rem;
+  font-family: 'Abril Fatface', serif;
+  line-height: 1;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 3rem;
+  font-family: 'Abril Fatface', serif;
+  line-height: 1;
+  margin-left: 10px;
+}
+
+.time-title {
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: serif;
+  margin-bottom: 4px;
+  margin-left: 10px;
+}
+
+.titles {
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: serif;
+  margin-bottom: 4px;
+}
+
+.stop {
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.stop-btn {
+  background-color: #e32636!important;
+  border: none!important;
+}
+
+.stop-btn:hover{
+  transform: scale(1.02);
+  color: #FEFFFF!important;
+}
+
+.confirm {
+  margin-top: 30px;
+  margin-bottom: 13px;
+}
+
+.yes-btn {
+width: 100px;
+background-color: #3AAFA9!important;
+  border: none!important;
+}
+
+.yes-btn:hover {
+  transform: scale(1.02);
+  color: #FEFFFF!important;
+}
+
+.no-btn {
+  width: 100px;
+  background-color: #e32636!important;
+  border: none!important;
+}
+
+.no-btn:hover {
+  transform: scale(1.02);
+  color: #FEFFFF!important;
+}
+
+
+.close-btn {
+width: 100px;
+background-color: #3AAFA9!important;
+  border: none!important;
+}
+
+.close-btn:hover {
+  transform: scale(1.02);
+  color: #FEFFFF!important;
+}
