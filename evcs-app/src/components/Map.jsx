@@ -50,7 +50,7 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
   // it go to previously clicked locations
   const handleMarkerClick = location => {
     console.log(location)
-    setViewport({ ...viewport, latitude: location.lat, longitude: location.lng, transitionDuration: 1000 });
+    setViewport({ ...viewport, latitude: location.lat, longitude: location.lng, transitionDuration: 500 });
   }
 
   // in here i will pass my array of locations and map them to Geojson features
@@ -84,14 +84,14 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
   function handleRender(item) {
     if (item.name) {
       return (
-        '<span><image src="' + server + '/icons/charging-station(20x20).png" /> '
-        + item.name + '</span><br/><small>' + item.address + '</small>'
+        '<image src="' + server + '/icons/electric(21x21).png" /> '
+        + item.name + '<br/><small>' + item.address + '</small>'
       )
     }
     else if (item.properties.address)
-      return '<span><image src="' + server + '/icons/finland.svg" />' + item.text + '</span><br/><small>' + item.properties.address + '</small>'
+      return '<image src="' + server + '/icons/finland(16x21).png" /> ' + item.text + '<br/><small>' + item.properties.address + '</small>'
     else
-      return '<span>' + item.text + '</span><br/><small>' + item['place_name'] + '</small>'
+      return '<image src="' + server + '/icons/finland(16x21).png" /> ' + item.text + '<br/><small>' + item['place_name'] + '</small>'
   }
 
   return (
@@ -106,7 +106,7 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
         mapboxApiAccessToken={TOKEN}
         onViewportChange={nextViewport => setViewport(nextViewport)}
         onClick={onPopupClose}
-        maxZoom={17}
+        maxZoom={16}
         minZoom={4}
         maxPitch={0}
         dragRotate={false}
