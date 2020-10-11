@@ -26,7 +26,7 @@ const SlidingPane = (props) => {
       overlayClassName='sliding-pane-overlay'
       onRequestClose={() => { }}
       from='left'
-      width='350px'
+      width='362px'
       hideHeader={true} >
       <LocationCard
         image={selectedLocation.img}
