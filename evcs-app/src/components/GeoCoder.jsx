@@ -18,7 +18,7 @@ const GeoCoder = ({ mapRef, onViewportChange, forwardGeocoder, render, container
       countries="FI"
       position="top-right"
       reverseGeocode={true}
-      zoom ={17}
+      zoom ={16}
       placeholder='Search for a charging location'
       clearAndBlurOnEsc={true}
       clear
