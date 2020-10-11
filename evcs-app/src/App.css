@@ -89,9 +89,13 @@ thead {
   z-index: 1;
 }
 
+.mapboxgl-ctrl-geocoder {
+  width: 100%;
+}
+
 .slide-pane__content {
   padding: 0;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 .sliding-pane-overlay.ReactModal__Overlay--after-open {
@@ -103,17 +107,3 @@ thead {
   Width: 75vh;
   padding: 0;
 }
-
-/*.slide-pane__overlay {
-  top: 55vh;
-}
-
-.slide-pane__overlay.ReactModal__Overlay--after-open{
-  background-color: rgba(255, 255, 255 , 0);
-}
-.slide-pane_from_bottom.ReactModal__Content--after-open {
-
-  width: 100vh;
-  height: 45vh;
-  top: 55vh;
-}*/

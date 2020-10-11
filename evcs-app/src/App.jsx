@@ -58,8 +58,8 @@ const App = () => {
    useEffect(() => {
       const filtered = historySearch.filter(h => {
          return h.name.toLowerCase().includes(searchQuery.toLowerCase())
-      })
-      console.log('filter ', filtered);
+      });
+
       setUserHistory(filtered);
    },[searchQuery]);
 
@@ -164,6 +164,7 @@ const App = () => {
                      <Map
                         locations={locations}
                         selectedLocation={selectedLocation}
+                        onResult={handleLocationSelect}
                         onPopupClose={handlePopupClose}
                         {...props} />
 

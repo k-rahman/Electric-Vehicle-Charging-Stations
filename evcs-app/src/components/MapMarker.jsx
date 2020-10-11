@@ -12,14 +12,15 @@ const MapMarker = ({ locations, onMarkerClick }) => {
         latitude={location.lat}
         longitude={location.lng}
         offsetLeft={20}
-        offsetTop={-20}>
+        offsetTop={-20}
+        >
         <Link 
           to={`/locations/${location.id}`} 
           className='remove-focus-outline'>
           <img
+            onClick={() => onMarkerClick(location)}
             className='marker-img'
-            onMarkerClick={onMarkerClick}
-            src={`${server}/icons/charging-station.svg`}
+            src={`${server}/icons/electric.svg`}
             alt='Charging Station' />
         </Link>
       </Marker>

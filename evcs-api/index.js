@@ -19,8 +19,8 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/api/locations', locations);
-app.use('/api/locations/stations', stations);
-app.use('/api/locations/:station?/outlets', outlets);
+app.use('/api/locations/:locationId/stations', stations);
+app.use('/api/locations/:stations?/outlets', outlets);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/activate', activate);
