@@ -1,6 +1,7 @@
 body {
   overflow: hidden;
 }
+
 .App {
   text-align: center;
 }
@@ -65,10 +66,9 @@ thead {
   border: 1px solid #3AAFA9 !important;
 }
 
-
 .marker-img {
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
 
@@ -91,7 +91,6 @@ thead {
 
 .slide-pane__content {
   padding: 0;
-  margin-top: 50px;
 }
 
 .sliding-pane-overlay.ReactModal__Overlay--after-open {
@@ -102,4 +101,5 @@ thead {
 .sliding-pane-content.ReactModal__Content--after-open {
   Width: 75vh;
   padding: 0;
+  background-color: #FEFFFF;
 }
