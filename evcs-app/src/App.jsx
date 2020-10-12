@@ -3,6 +3,7 @@ import { Route, useHistory, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getLocations, getLocationById } from './services/locationService';
 import { getStationsByLocationId } from './services/stationService';
+import { getOutletsByStationId } from './services/outletService';
 import { getHistoryByUserId } from './services/historyService';
 import NavBar from './components/common/NavBar';
 import Map from './components/Map';
@@ -11,7 +12,7 @@ import LoginForm from './components/LoginForm';
 import Register from './components/Register';
 import History from './components/History';
 import Activation from './components/Activation';
-import Monitor from './components/common/Monitor';
+import Monitor from './components/Monitor';
 import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -27,6 +28,7 @@ const App = () => {
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
    const [stations, setStations] = useState([]);
+   const [outlets, setOutlets] = useState([]);
    const [outletInUse, setOutletInUse] = useState(null);
    const [userHistory, setUserHistory] = useState([]);
    const [searchQuery, setSearchQuery] = useState('');
@@ -39,7 +41,7 @@ const App = () => {
       }
       fetchLocations();
 
-      logIn();
+      handleLogIn();
 
       history.listen(handleRouterChange)
    }, []);
@@ -61,66 +63,68 @@ const App = () => {
       });
 
       setUserHistory(filtered);
-   },[searchQuery]);
+   }, [searchQuery]);
+
 
    const handleLocationSelect = async locationId => {
       const { data: location } = await getLocationById(locationId);
       setSelectedLocation(location);
-   };
+   }
+
+   const handleGetOutlets = async stationId => {
+      const { data } = await getOutletsByStationId(stationId);
+      setOutlets(data);
+   }
 
    const handleModalOpen = ({ currentTarget: link }) => {
-      console.log('ModalOpen')
       if (link.name === 'Login') setShowLogin(true);
       else if (link.name === 'Register') setShowRegister(true);
-
-
-      // possibly own function
-      else if (link.name === 'activate' && loggedIn)
-         setShowActivate(true);
-      else if (link.name === 'activate' && !loggedIn)
-         toast.dark('You need to be logged in to use the service.');
-
-
-      // Logout maybe move to own function
-      else if (link.name === 'Logout') {
-         localStorage.removeItem('name')
-         window.location.reload();
-      }
-   };
+   }
 
    const handleModalClose = () => {
       setShowLogin(false);
       setShowRegister(false);
       setShowActivate(false);
       setShowHistory(false);
-   };
+   }
 
    const handlePopupClose = () => {
       setSelectedLocation(null);
       history.push('/');
-   };
+   }
 
    const handleRouterChange = () => {
       if (history.location.pathname === '/')
          setSelectedLocation(null);
-   };
+   }
 
    const handlestartCharging = outlet => {
       setShowActivate(false);
       setOutletInUse(outlet);
-   };
+   }
 
    const handleMonitorClose = () => {
       setOutletInUse(null);
    }
 
-   const logIn = () => {
+   const handleLogIn = () => {
       // if (!loggedIn) {
       //    toast.dark('Successfully logged in!');
       // }
       const user = localStorage.getItem('name');
       setLoggedIn(user);
-   };
+   }
+
+   const handleLogout = () => {
+      localStorage.removeItem('name')
+      window.location.reload();
+   }
+
+   const handleShowActivate = () => {
+      loggedIn ? 
+      setShowActivate(true) : 
+      toast.dark('You need to be logged in to use the service.');
+   }
 
    const handleHistoryClick = async () => {
       const userId = localStorage.getItem('userId');
@@ -136,7 +140,7 @@ const App = () => {
       }
    }
 
-  const handleHistorySearch = query => {
+   const handleHistorySearch = query => {
       setSearchQuery(query);
    }
 
@@ -153,6 +157,7 @@ const App = () => {
          <NavBar
             siteName='EVCS'
             user={loggedIn}
+            onLogout={handleLogout}
             onLinkClick={handleModalOpen}
             onHistoryClick={handleHistoryClick}
          />
@@ -171,25 +176,27 @@ const App = () => {
                      <SlidingPane
                         selectedLocation={selectedLocation}
                         stations={stations}
+                        outlets={outlets}
+                        getOutlets={handleGetOutlets}
                         onLocationSelect={handleLocationSelect}
-                        onStartChargingClick={handleModalOpen}
+                        onStartChargingClick={handleShowActivate}
                         {...props} />
                   </>} />
             <Route path='*' component={NotFound} />
          </Switch>
          {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
-         {(showHistory) && 
-            <History 
-               onModalClose={handleModalClose} 
-               data={userHistory} 
-               onValueChange={handleHistorySearch} 
+         {(showHistory) &&
+            <History
+               onModalClose={handleModalClose}
+               data={userHistory}
+               onValueChange={handleHistorySearch}
                searchQuery={searchQuery} />
          }
          {(showActivate) &&
             <Activation
                onModalClose={handleModalClose}
-               onStartCharging={handlestartCharging} 
+               onStartCharging={handlestartCharging}
                selectedLocation={selectedLocation} />
          }
          {(outletInUse) &&
@@ -199,7 +206,9 @@ const App = () => {
                outlet={outletInUse} />
          }
 
-         Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+         Icons made by 
+         <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from 
+         <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
       </>
    );
 }
