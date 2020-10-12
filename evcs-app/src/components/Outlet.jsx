@@ -19,7 +19,7 @@ const Outlet = (props) => {
 
    return (
       <li className='list-group-item'>
-         <div className="row justify-content-between mt-2"> {/*first main row*/}
+         <div className="row justify-content-between mt-2"> {/*main row*/}
             <div className={`${styles['plug-img-container']} col-3`}> {/*first column*/}
                <img
                   src={`${server}/images/${img}`}
@@ -37,7 +37,7 @@ const Outlet = (props) => {
                   </div>
                </div>
             </div>
-            <div className='col-4'>
+            <div className='col-4'>{/*third column*/}
                <div className='row p-1'>
                   <div className={`${styles['plug-status']} col-12`}>
                      <span className={`${statusClass} badge`}>{status}</span>

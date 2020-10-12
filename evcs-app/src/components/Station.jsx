@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { getOutletsByStationId } from '../services/outletService';
+import React, { useEffect } from 'react';
 import Outlet from './Outlet';
 import styles from '../assets/css/station.module.css';
 
-const Station = ({ station, stationNumber }) => {
-  const [outlets, setOutlets] = useState([]);
+const Station = ({ station, stationNumber, outlets, getOutlets }) => {
 
   useEffect(() => {
-    const fetchOutlets = async () => {
-      const { data } = await getOutletsByStationId(station.id);
-      setOutlets(data);
-    }
-
-    fetchOutlets();
+    getOutlets(station.id);
   }, [station])
 
   const countAvailable = () => {

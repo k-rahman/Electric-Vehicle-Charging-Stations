@@ -10,6 +10,8 @@ const SlidingPane = (props) => {
     selectedLocation,
     stations,
     match,
+    getOutlets,
+    outlets,
     onLocationSelect,
     onStartChargingClick,
   } = props;
@@ -40,6 +42,8 @@ const SlidingPane = (props) => {
           key={station.id}
           station={station}
           stationNumber={index + 1}
+          getOutlets={getOutlets}
+          outlets={outlets}
         />))}
     </Pane>
   );

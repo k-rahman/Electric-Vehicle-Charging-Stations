@@ -7,10 +7,12 @@ const server = process.env.REACT_APP_SERVER;
 const Location = ({ image, name, address, stationsCount, onStartChargingClick }) => {
   return (
     <div className={`${styles.location} card shadow-lg sticky-top`}>
+      <div className={styles['location-img-container']} >
       <img
         src={`${server}/images/${image}`}
-        className={`${styles['location-img']} card-img-top`}
+        className='card-img-top'
         alt="Location" />
+      </div>
       <div className={`${styles['location-details']} card-body`}>
         <p
           className={`${styles['location-name']} card-title h6 font-weight-bold`}>{name}</p>
@@ -26,9 +28,8 @@ const Location = ({ image, name, address, stationsCount, onStartChargingClick })
         <button
           id="charging-btn"
           name="activate"
-          className={`${styles['charging-btn']} btn`}
-          onClick={onStartChargingClick}
-        >Start Charging</button>
+          className={`${styles['charging-btn']} ${styles['charging-btn-3d']} btn`}
+          onClick={onStartChargingClick}>Start Charging</button>
       </div>
     </div>
   );
