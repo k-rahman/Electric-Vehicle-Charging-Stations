@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import GlGeocoder from "react-map-gl-geocoder";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 

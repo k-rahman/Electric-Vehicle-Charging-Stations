@@ -10,7 +10,7 @@ const Location = ({ image, name, address, stationsCount, onStartChargingClick })
       <img
         src={`${server}/images/${image}`}
         className={`${styles['location-img']} card-img-top`}
-        alt="Location image" />
+        alt="Location" />
       <div className={`${styles['location-details']} card-body`}>
         <p
           className={`${styles['location-name']} card-title h6 font-weight-bold`}>{name}</p>
@@ -19,7 +19,7 @@ const Location = ({ image, name, address, stationsCount, onStartChargingClick })
           <small>{address}</small>
         </p>
         <span
-          class={`${styles['stations-count']} badge`}>{stationsCount} station{pluralOrSingular(stationsCount)}
+          className={`${styles['stations-count']} badge`}>{stationsCount} station{pluralOrSingular(stationsCount)}
         </span>
       </div>
       <div className={styles['charging-btn-container']}>

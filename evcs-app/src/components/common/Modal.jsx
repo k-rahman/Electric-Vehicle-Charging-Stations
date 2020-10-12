@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import $ from 'jquery';
-import styles from '../../assets/css/modal.module.css';
 
 const Modal = React.forwardRef((props, ref) => {
 

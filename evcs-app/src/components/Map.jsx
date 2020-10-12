@@ -69,8 +69,7 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
       ) {
 
         feature['place_name'] = feature.name;
-        feature['address'] = feature.address;
-        feature['center'] = new Array(feature.lng, feature.lat);
+        feature['center'] = [feature.lng, feature.lat];
         feature['place_type'] = ['charging location'];
 
         matchingFeatures.push(feature);

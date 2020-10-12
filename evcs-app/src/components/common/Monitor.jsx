@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import $ from 'jquery';
 import { saveChargeInfo } from './../../services/historyService';
-import { updateOutletStatus, getOutletById } from './../../services/outletService';
+import { updateOutletStatus } from './../../services/outletService';
 import { convertTime } from '../../utils/dateTimeUtils';
 import { toast } from 'react-toastify';
 import Modal from './Modal';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory, Switch, Redirect } from 'react-router-dom';
+import { Route, useHistory, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getLocations, getLocationById } from './services/locationService';
 import { getStationsByLocationId } from './services/stationService';
