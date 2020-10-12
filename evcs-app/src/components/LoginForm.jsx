@@ -1,6 +1,7 @@
 import React, {createRef} from 'react';
 import $ from 'jquery';
 import Joi from 'joi';
+import { toast } from 'react-toastify';
 import { login } from '../services/authService';
 import Modal from './common/Modal';
 import Form from './common/Form';
@@ -42,10 +43,12 @@ class LoginForm extends Form {
          const { data: user } = await login(data.email, data.password);
          localStorage.setItem('name', user[0].name);
          localStorage.setItem('userId', user[0].id);
-         window.location.reload();
+
+         // window.location.reload();
          if (user) {
             $(this.modalRef.current).modal('hide');
             this.props.onModalClose();
+            this.props.loggedIn();
          }
       }
       catch (ex) {

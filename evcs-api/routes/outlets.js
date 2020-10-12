@@ -3,7 +3,7 @@ const router = express.Router({mergeParams: true});
 
 const db = require('../db/index');
 
-//get out by id
+//get outlet by id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db.query('SELECT o.id, o.code,  o.status, o.power, o.station, c.name, c.img, p.payment, p.unit'
@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
     + ' WHERE o.station = ?'
     + ' GROUP BY o.id', stations)
     .then(results => {
+      console.log(results)
       res.send(results);
     })
     .catch(err => {
@@ -46,7 +47,6 @@ router.put('/:id', (req, res) => {
 
   db.query('UPDATE outlets SET status="Available" WHERE id=?', id)
     .then(result => {
-      console.log(result);
       res.sendStatus(204)})
     .catch(e => 
       {console.log(e);

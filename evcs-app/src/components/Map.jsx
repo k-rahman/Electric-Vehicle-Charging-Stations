@@ -49,7 +49,6 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
   // click location is fetched from server so when user click back button,
   // it go to previously clicked locations
   const handleMarkerClick = location => {
-    console.log(location)
     setViewport({ ...viewport, latitude: location.lat, longitude: location.lng, transitionDuration: 500 });
   }
 

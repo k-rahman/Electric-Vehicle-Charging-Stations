@@ -3,7 +3,6 @@ import { Route, useHistory, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getLocations, getLocationById } from './services/locationService';
 import { getStationsByLocationId } from './services/stationService';
-import { getOutletsByStationId } from './services/outletService';
 import { getHistoryByUserId } from './services/historyService';
 import NavBar from './components/common/NavBar';
 import Map from './components/Map';
@@ -16,6 +15,7 @@ import Monitor from './components/Monitor';
 import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { login } from './services/authService';
 
 let historySearch = [];
 
@@ -28,7 +28,6 @@ const App = () => {
    const [locations, setLocations] = useState([]);
    const [selectedLocation, setSelectedLocation] = useState(null);
    const [stations, setStations] = useState([]);
-   const [outlets, setOutlets] = useState([]);
    const [outletInUse, setOutletInUse] = useState(null);
    const [userHistory, setUserHistory] = useState([]);
    const [searchQuery, setSearchQuery] = useState('');
@@ -41,7 +40,8 @@ const App = () => {
       }
       fetchLocations();
 
-      handleLogIn();
+      const user = localStorage.getItem('name');
+      setLoggedIn(user);
 
       history.listen(handleRouterChange)
    }, []);
@@ -68,12 +68,8 @@ const App = () => {
 
    const handleLocationSelect = async locationId => {
       const { data: location } = await getLocationById(locationId);
+      console.log('location data is ', location);
       setSelectedLocation(location);
-   }
-
-   const handleGetOutlets = async stationId => {
-      const { data } = await getOutletsByStationId(stationId);
-      setOutlets(data);
    }
 
    const handleModalOpen = ({ currentTarget: link }) => {
@@ -108,16 +104,15 @@ const App = () => {
    }
 
    const handleLogIn = () => {
-      // if (!loggedIn) {
-      //    toast.dark('Successfully logged in!');
-      // }
+      toast.dark('Successfully logged in!');
       const user = localStorage.getItem('name');
       setLoggedIn(user);
    }
 
    const handleLogout = () => {
+      toast.dark('You are now logged out.');
       localStorage.removeItem('name')
-      window.location.reload();
+      setLoggedIn(null);
    }
 
    const handleShowActivate = () => {
@@ -176,15 +171,13 @@ const App = () => {
                      <SlidingPane
                         selectedLocation={selectedLocation}
                         stations={stations}
-                        outlets={outlets}
-                        getOutlets={handleGetOutlets}
                         onLocationSelect={handleLocationSelect}
                         onStartChargingClick={handleShowActivate}
                         {...props} />
                   </>} />
             <Route path='*' component={NotFound} />
          </Switch>
-         {(showLogin) && <LoginForm onModalClose={handleModalClose} />}
+         {(showLogin) && <LoginForm onModalClose={handleModalClose} loggedIn={handleLogIn}/>}
          {(showRegister) && <Register onModalClose={handleModalClose} />}
          {(showHistory) &&
             <History
