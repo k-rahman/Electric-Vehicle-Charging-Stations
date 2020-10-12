@@ -62,6 +62,7 @@ FOREIGN KEY (connector) REFERENCES connectors(id)
 CREATE TABLE IF NOT EXISTS history (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 charge_time DATETIME NOT NULL,
+charge_duration INT UNSIGNED NOT NULL,
 energy_used SMALLINT UNSIGNED NOT NULL,
 cost DECIMAL(5,2) NOT NULL,
 user INT NOT NULL,
@@ -71,34 +72,34 @@ FOREIGN KEY (location) REFERENCES locations(id)
 ) ENGINE=INNODB;
 
 
-INSERT INTO Locations  VALUES (NULL,'Neste Ouluntulli', 'Pohjantie 1364, 90450 Kempele, Suomi', 64.93949, 25.534542, 'Neste Ouluntulli 1.jpg');
-INSERT INTO Locations  VALUES (NULL,'Hesburger Parkano', 'Pahkalantie 3, 39700 Parkano, Finland', 62.005091, 23.01012, 'Hesburger Parkano 9.jpg');
-INSERT INTO Locations  VALUES (NULL,'Hotelli Inari', 'Inarintie 40, 99870‎ Inari, Finland', 68.906898, 27.026894, 'default-img.png');
-INSERT INTO Locations  VALUES (NULL,'Rajabaari Neste', 'Käsivarrentie 3767, 99470 Karesuvanto, Finland', 68.449527, 22.482289, 'Rajabaari Neste 4.jpg');
-INSERT INTO Locations  VALUES (NULL,'Kokkola Minimani', 'Energiatie, 67100 Kokkola, Suomi', 63.835359, 23.113082, 'Kokkola Minimani 5.jpg');
-INSERT INTO Locations  VALUES (NULL,'Kajaani airfield', 'Lentokentäntie, 87850 Paltaniemi, Finland', 64.280678, 27.747153, 'Kajaani Airfield 7.jpg');
-INSERT INTO Locations  VALUES (NULL,'Kauppakeskus Maili', 'Ajokatu 53-55', 60.963704, 25.656747, 'Kauppakeskus Maili 3.jpg');
-INSERT INTO Locations  VALUES (NULL,'Majatalo Villanen', 'Kauppilantie 3, 35400 JÄMSÄ', 61.729632, 24.801129, 'Majatalo Villanen 14.jpg');
-INSERT INTO Locations  VALUES (NULL,'Motonet Kaarina', 'Varastomiehenkatu 4, 20780 Kaarina, Finland', 60.421751, 22.378079, 'Motonet Kaarina 17.jpg');
-INSERT INTO Locations  VALUES (NULL,'SEO Käyrämön Keidas', 'Sodankyläntie 6789, 97540 Tiainen', 66.956262, 26.296221, 'SEO Käyrämön Keidas 10.jpg');
-INSERT INTO Locations  VALUES (NULL,'Lähi-ABC Kontiolahti ', 'Uurolantie 4, 80770 Kontiolahti, Finland', 62.714987, 29.857018, 'Lähi-ABC Kontionlahti 11.jpg');
-INSERT INTO Locations  VALUES (NULL,'Sandösunds Camping', '25 Trollvägen, 22550, Ahvenanmaa', 60.268553, 20.391858, 'Sandösunds Camping 12.jpg');
-INSERT INTO Locations  VALUES (NULL,'Nikkilän linja-autoasema', 'Iso Kylätie 18, 04130 Sipoo, Suomi', 60.376168, 25.267906, 'Nikkilän linja-autoasema 2.jpg');
-INSERT INTO Locations  VALUES (NULL,'Pori Airport/HERTZ Pori', 'Lentoasemantie 1, 28500 Pori, Suomi', 61.468973, 21.792922, 'Pori Airport 13.jpg');
-INSERT INTO Locations  VALUES (NULL,'Ähtärin Eläinpuisto', 'Karhunkierros 150, Ähtäri', 62.535733, 24.183459, 'Ähtärin Eläinpuisto 15.jpg');
-INSERT INTO Locations  VALUES (NULL,'VÄRE, Liikenneasema Koskelo', 'Ysitie 3399, 77600 Suonenjoki', 62.586781, 27.052153, 'VÄRE Liikenneasema Koskelo 16.jpg');
-INSERT INTO Locations  VALUES (NULL,'Tammisaari ', 'Asematie 2, Tammisaari', 59.976418, 23.438303, 'Tammisaari Railway Station 8.jpg');
-INSERT INTO Locations  VALUES (NULL,'Sastamalan Osuuspankki', 'Puistokatu 2, 38200 Sastamala, Suomi', 61.342082, 22.908408, 'Sastamalan Osuuspankki 18.jpg');
-INSERT INTO Locations  VALUES (NULL,'Prisma Kangasala', 'Mäkirinteentie 10 36220 Kangasala Finland', 61.476166, 23.978113, 'Prisma Kangasala 19.jpg');
-INSERT INTO Locations  VALUES (NULL,'Prisma Ylivieska', 'Savarinkatu 9, 84100 Ylivieska', 64.060311, 24.556345, 'Prisma Ylivieska 6.jpg');
+INSERT INTO locations  VALUES (NULL,'Neste Ouluntulli', 'Pohjantie 1364, 90450 Kempele, Suomi', 64.93949, 25.534542, 'Neste Ouluntulli 1.jpg');
+INSERT INTO locations  VALUES (NULL,'Hesburger Parkano', 'Pahkalantie 3, 39700 Parkano, Finland', 62.005091, 23.01012, 'Hesburger Parkano 9.jpg');
+INSERT INTO locations  VALUES (NULL,'Hotelli Inari', 'Inarintie 40, 99870 Inari, Finland', 68.906898, 27.026894, 'Hotelli Inari 20.jpg');
+INSERT INTO locations  VALUES (NULL,'Rajabaari Neste', 'Käsivarrentie 3767, 99470 Karesuvanto, Finland', 68.449527, 22.482289, 'Rajabaari Neste 4.jpg');
+INSERT INTO locations  VALUES (NULL,'Kokkola Minimani', 'Energiatie, 67100 Kokkola, Suomi', 63.835359, 23.113082, 'Kokkola Minimani 5.jpg');
+INSERT INTO locations  VALUES (NULL,'Kajaani airfield', 'Lentokentäntie, 87850 Paltaniemi, Finland', 64.280678, 27.747153, 'Kajaani Airfield 7.jpg');
+INSERT INTO locations  VALUES (NULL,'Kauppakeskus Maili', 'Ajokatu 53-55', 60.963704, 25.656747, 'Kauppakeskus Maili 3.jpg');
+INSERT INTO locations  VALUES (NULL,'Majatalo Villanen', 'Kauppilantie 3, 35400 JÄMSÄ', 61.729632, 24.801129, 'Majatalo Villanen 14.jpg');
+INSERT INTO locations  VALUES (NULL,'Motonet Kaarina', 'Varastomiehenkatu 4, 20780 Kaarina, Finland', 60.421751, 22.378079, 'Motonet Kaarina 17.jpg');
+INSERT INTO locations  VALUES (NULL,'SEO Käyrämön Keidas', 'Sodankyläntie 6789, 97540 Tiainen', 66.956262, 26.296221, 'SEO Käyrämön Keidas 10.jpg');
+INSERT INTO locations  VALUES (NULL,'Lähi-ABC Kontiolahti ', 'Uurolantie 4, 80770 Kontiolahti, Finland', 62.714987, 29.857018, 'Lähi-ABC Kontionlahti 11.jpg');
+INSERT INTO locations  VALUES (NULL,'Sandösunds Camping', '25 Trollvägen, 22550, Ahvenanmaa', 60.268553, 20.391858, 'Sandösunds Camping 12.jpg');
+INSERT INTO locations  VALUES (NULL,'Nikkilän linja-autoasema', 'Iso Kylätie 18, 04130 Sipoo, Suomi', 60.376168, 25.267906, 'Nikkilän linja-autoasema 2.jpg');
+INSERT INTO locations  VALUES (NULL,'Pori Airport/HERTZ Pori', 'Lentoasemantie 1, 28500 Pori, Suomi', 61.468973, 21.792922, 'Pori Airport 13.jpg');
+INSERT INTO locations  VALUES (NULL,'Ähtärin Eläinpuisto', 'Karhunkierros 150, Ähtäri', 62.535733, 24.183459, 'Ähtärin Eläinpuisto 15.jpg');
+INSERT INTO locations  VALUES (NULL,'VÄRE, Liikenneasema Koskelo', 'Ysitie 3399, 77600 Suonenjoki', 62.586781, 27.052153, 'VÄRE Liikenneasema Koskelo 16.jpg');
+INSERT INTO locations  VALUES (NULL,'Tammisaari ', 'Asematie 2, Tammisaari', 59.976418, 23.438303, 'Tammisaari Railway Station 8.jpg');
+INSERT INTO locations  VALUES (NULL,'Sastamalan Osuuspankki', 'Puistokatu 2, 38200 Sastamala, Suomi', 61.342082, 22.908408, 'Sastamalan Osuuspankki 18.jpg');
+INSERT INTO locations  VALUES (NULL,'Prisma Kangasala', 'Mäkirinteentie 10 36220 Kangasala Finland', 61.476166, 23.978113, 'Prisma Kangasala 19.jpg');
+INSERT INTO locations  VALUES (NULL,'Prisma Ylivieska', 'Savarinkatu 9, 84100 Ylivieska', 64.060311, 24.556345, 'Prisma Ylivieska 6.jpg');
 
 
 INSERT INTO prices VALUES (NULL, 0.20, 'kWh');
 INSERT INTO prices VALUES (NULL, 0.18, 'min');
 INSERT INTO prices VALUES (NULL, 0.0, 'free');
 
-INSERT INTO connectors VALUES (NULL, 'CCS', 'default-image.png');
-INSERT INTO connectors VALUES (NULL, 'TYPE 2', 'default-image.png');
+INSERT INTO connectors VALUES (NULL, 'CCS', 'CCS.png');
+INSERT INTO connectors VALUES (NULL, 'TYPE 2', 'Type2.png');
 
 INSERT INTO stations  VALUES (NULL, 'Fast', 1);
 INSERT INTO stations VALUES  (NULL,  'Fast', 2);
