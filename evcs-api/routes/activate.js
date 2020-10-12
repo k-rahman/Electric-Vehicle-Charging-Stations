@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
           + ' WHERE s.location = ? AND code = ?', [locationId, code])
     .then(outlet => {
 
-      if (outlet.length === 0) return res.status(400).send('Incorrect code, please check your code or select the right location.');
+      if (outlet.length === 0) return res.status(400).send('Incorrect code, check your code or select the right location.');
       if (outlet[0].status === 'In use') return res.status(400).send('Outlet is already in use!');
 
       const id = outlet[0].id;

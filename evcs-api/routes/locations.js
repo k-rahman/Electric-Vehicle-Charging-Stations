@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db
-    .query('SELECT * FROM locations WHERE Locations.id = ?', id)
+    .query('SELECT * FROM locations WHERE locations.id = ?', id)
     .then(result => {
       console.log(result);
       res.send(result[0]);
