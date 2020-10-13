@@ -16,7 +16,7 @@ const Station = ({ station, stationNumber }) => {
     }
 
     fetchStationOutlets();
-  }, [])
+  }, [station])
 
 
   useEffect(() => {
