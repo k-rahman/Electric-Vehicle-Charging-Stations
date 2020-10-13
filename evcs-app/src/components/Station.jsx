@@ -3,6 +3,7 @@ import { getOutletsByStationId } from '../services/outletService';
 import DelayedRender from './common/DelayedRender ';
 import Outlet from './Outlet';
 import styles from '../assets/css/station.module.css';
+import { pluralOrSingular } from './../utils/pluralOrSingle';
 
 const Station = ({ station, stationNumber }) => {
 
@@ -29,7 +30,7 @@ const Station = ({ station, stationNumber }) => {
     for (let outlet of outlets)
       if (outlet.status === 'Available')
         count++
-    return count > 0 ? count + ' outlet available' : 'All outlets are in use';
+    return count > 0 ? count + ` outlet${pluralOrSingular(count)} available` : 'All outlets are in use';
   }
 
   return (
