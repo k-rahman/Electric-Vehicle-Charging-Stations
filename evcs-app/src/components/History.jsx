@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {convertDateTime} from '../utils/dateTimeUtils';
+import React, { useRef } from 'react';
+import { convertDateTime } from '../utils/dateTimeUtils';
 import Modal from '../components/common/Modal';
 import Table from '../components/common/Table';
 import SearchBox from './common/SearchBox';
@@ -31,10 +31,11 @@ const History = (props) => {
   },
   ];
 
-  const { 
-      onModalClose,
-     onValueChange, 
-     searchQuery
+  const {
+    onModalClose,
+    onValueChange,
+    data,
+    searchQuery
   } = props;
 
   const modalRef = useRef();
@@ -49,16 +50,20 @@ const History = (props) => {
       position='modal-dialog-centered'
       onModalClose={onModalClose}
       showCloseButton={true}>
-        <SearchBox
-          value={searchQuery}
-          onChange={onValueChange}
-          placeholder='Search by location...' 
-          className='sticky-top'
+      {!data.length
+        ? <div className="text-center">You have no history yet!</div>
+        : <>
+          <SearchBox
+            value={searchQuery}
+            onChange={onValueChange}
+            placeholder='Search by location...'
+            className='sticky-top'
           />
-      <Table
-        columns={columns}
-        data={props.data}
-        className='table-hover text-center table-striped' />
+          <Table
+            columns={columns}
+            data={data}
+            className='table-hover text-center table-striped' />
+        </>}
     </Modal>
   );
 }
