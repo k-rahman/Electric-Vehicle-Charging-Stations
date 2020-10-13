@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/index');
 
-
+// get all locations
 router.get('/', (req, res) => {
   db.query('SELECT l.id, name, address, lat, lng, img'
     + ', JSON_ARRAYAGG(JSON_OBJECT("id", s.id)) as stations'
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     })
 })
 
-
+// get location by ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db
