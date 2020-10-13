@@ -87,7 +87,7 @@ INSERT INTO connectors VALUES (NULL, 'TYPE 2', 'Type2.png');
 -- location 1
 INSERT INTO locations  VALUES (NULL,'Neste Ouluntulli', 'Pohjantie 1364, 90450 Kempele, Suomi', 64.93949, 25.534542, 'Neste Ouluntulli 1.jpg');
 INSERT INTO stations  VALUES (NULL, 'Fast', 1);
-INSERT INTO outlets VALUES (NULL, 'A4FE', 'Available', '50', 1, 1, 1);
+INSERT INTO outlets VALUES (NULL, 'A4FE', 'In use', '50', 1, 1, 1);
 INSERT INTO stations VALUES (NULL, 'Fast', 1);
 INSERT INTO outlets VALUES (NULL, 'A5FF', 'Available', '100', 2, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 1);
@@ -103,7 +103,7 @@ INSERT INTO outlets VALUES  (NULL, 'B5ER', 'Available' ,'50', 5, 1, 1);
 INSERT INTO stations VALUES  (NULL,  'Slow', 2);
 INSERT INTO outlets VALUES  (NULL, 'B8PW', 'Available' , '22', 6, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 2);
-INSERT INTO outlets  VALUES (NULL, 'G5OP', 'Available', '22', 7, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'G5OP', 'In use', '22', 7, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'H1EK', 'Available', '22', 7, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 2);
 INSERT INTO outlets  VALUES (NULL, 'J3QD', 'Available', '22', 8, 2, 3);
@@ -138,8 +138,8 @@ INSERT INTO stations  VALUES (NULL, 'Slow', 5);
 INSERT INTO outlets  VALUES (NULL, 'Z3CD', 'Available', '22', 15, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'H0MG', 'Available', '22', 15, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 5);
-INSERT INTO outlets  VALUES (NULL, 'Q3FO', 'Available', '22', 16, 2, 2);
-INSERT INTO outlets  VALUES (NULL, 'F5VV', 'Available', '22', 16, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'Q3FO', 'In use', '22', 16, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'F5VV', 'In use', '22', 16, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 5);
 INSERT INTO outlets  VALUES (NULL, 'G2FL', 'Available', '22', 17, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'H1BV', 'Available', '22', 17, 2, 2);
@@ -149,8 +149,8 @@ INSERT INTO locations  VALUES (NULL,'Kajaani airfield', 'Lentokentäntie, 87850 
 INSERT INTO stations  VALUES (NULL, 'Fast', 6);
 INSERT INTO outlets  VALUES (NULL, 'G4CD', 'Available', '100', 18, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 6);
-INSERT INTO outlets  VALUES (NULL, 'J7BJ', 'Available', '22', 19, 2, 3);
-INSERT INTO outlets  VALUES (NULL, 'L3WM', 'Available', '22', 19, 2, 3);
+INSERT INTO outlets  VALUES (NULL, 'J7BJ', 'In use', '22', 19, 2, 3);
+INSERT INTO outlets  VALUES (NULL, 'L3WM', 'In use', '22', 19, 2, 3);
 INSERT INTO stations  VALUES (NULL, 'Fast', 6);
 INSERT INTO outlets  VALUES (NULL, 'P9KW', 'Available', '50', 20, 1, 1);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -161,7 +161,7 @@ INSERT INTO outlets  VALUES (NULL, 'M1IZ', 'Available', '22', 21, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'N4UX', 'Available', '22', 21, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 7);
 INSERT INTO outlets  VALUES (NULL, 'M1GG', 'Available', '22', 22, 2, 3);
-INSERT INTO outlets  VALUES (NULL, 'V2OR', 'Available', '22', 22, 2, 3);
+INSERT INTO outlets  VALUES (NULL, 'V2OR', 'In use', '22', 22, 2, 3);
 INSERT INTO stations  VALUES (NULL, 'Fast', 7);
 INSERT INTO outlets  VALUES (NULL, 'C3OP', 'Available', '150', 23, 1, 1);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -175,7 +175,7 @@ INSERT INTO outlets  VALUES (NULL, 'H3OK', 'Available', '22', 25, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Fast', 8);
 INSERT INTO outlets  VALUES (NULL, 'H5BV', 'Available', '100', 26, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 8);
-INSERT INTO outlets  VALUES (NULL, 'Q9RN', 'Available', '22', 27, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'Q9RN', 'In use', '22', 27, 2, 2);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 -- location 9
 INSERT INTO locations  VALUES (NULL,'Majatalo Villanen', 'Kauppilantie 3, 35400 JÄMSÄ', 61.729632, 24.801129, 'Majatalo Villanen 14.jpg');
@@ -184,7 +184,7 @@ INSERT INTO outlets  VALUES (NULL, 'H5EF', 'Available', '150', 28, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 9);
 INSERT INTO outlets  VALUES (NULL, 'H5BH', 'Available', '50', 29, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 9);
-INSERT INTO outlets  VALUES (NULL, 'G5TP', 'Available', '22', 30, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'G5TP', 'In use', '22', 30, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'H1SK', 'Available', '22', 30, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Slow', 9);
 INSERT INTO outlets  VALUES (NULL, 'J3LD', 'Available', '22', 31, 2, 3);
@@ -196,10 +196,10 @@ INSERT INTO stations  VALUES (NULL, 'Slow', 10);
 INSERT INTO outlets  VALUES (NULL, 'D4UD', 'Available', '22', 32, 2, 3);
 INSERT INTO outlets  VALUES (NULL, 'P1NX', 'Available', '22', 32, 2, 3);
 INSERT INTO outlets  VALUES (NULL, 'D6AF', 'Available', '22', 32, 2, 3);
-INSERT INTO outlets  VALUES (NULL, 'L9OP', 'Available', '22', 32, 2, 3);
+INSERT INTO outlets  VALUES (NULL, 'L9OP', 'In use', '22', 32, 2, 3);
 INSERT INTO stations  VALUES (NULL, 'Slow', 10);
 INSERT INTO outlets  VALUES (NULL, 'E7LU', 'Available', '22', 33, 2, 2);
-INSERT INTO outlets  VALUES (NULL, 'P0CB', 'Available', '22', 33, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'P0CB', 'In use', '22', 33, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'Q6UI', 'Available', '22', 33, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'W0LQ', 'Available', '22', 33, 2, 2);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -221,7 +221,7 @@ INSERT INTO stations  VALUES (NULL, 'Fast', 12);
 INSERT INTO outlets  VALUES (NULL, 'Y1CX', 'Available', '50', 37, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 12);
 INSERT INTO outlets  VALUES (NULL, 'K6QX', 'Available', '22', 38, 2, 2);
-INSERT INTO outlets  VALUES (NULL, 'L9MM', 'Available', '22', 38, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'L9MM', 'In use', '22', 38, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'M1VZ', 'Available', '22', 38, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'N2OX', 'Available', '22', 38, 2, 2);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
@@ -240,18 +240,18 @@ INSERT INTO locations  VALUES (NULL,'Pori Airport/HERTZ Pori', 'Lentoasemantie 1
 INSERT INTO stations  VALUES (NULL, 'Fast', 14);
 INSERT INTO outlets  VALUES (NULL, 'W4ER', 'Available', '100', 42, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 14);
-INSERT INTO outlets  VALUES (NULL, 'P0OI', 'Available', '100', 43, 1, 1);
+INSERT INTO outlets  VALUES (NULL, 'P5OI', 'Available', '100', 43, 1, 1);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 -- location 15
 INSERT INTO locations  VALUES (NULL,'Ähtärin Eläinpuisto', 'Karhunkierros 150, Ähtäri', 62.535733, 24.183459, 'Ähtärin Eläinpuisto 15.jpg');
 INSERT INTO stations  VALUES (NULL, 'Fast', 15);
 INSERT INTO outlets  VALUES (NULL, 'G3JD', 'Available', '150', 44, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 15);
-INSERT INTO outlets  VALUES (NULL, 'O5VF', 'Available', '50', 45, 1, 1);
+INSERT INTO outlets  VALUES (NULL, 'O5VF', 'In use', '50', 45, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 15);
 INSERT INTO outlets  VALUES (NULL, 'E1YV', 'Available', '22', 46, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'P8DB', 'Available', '22', 46, 2, 2);
-INSERT INTO outlets  VALUES (NULL, 'Q0RM', 'Available', '22', 46, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'Q0RM', 'In use', '22', 46, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'W5RM', 'Available', '22', 46, 2, 2);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 -- location 16
@@ -270,7 +270,7 @@ INSERT INTO outlets  VALUES (NULL, 'G3XL', 'Available', '100', 49, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 17);
 INSERT INTO outlets  VALUES (NULL, 'H5TR', 'Available', '50', 50, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 17);
-INSERT INTO outlets  VALUES (NULL, 'G6OE', 'Available', '22', 51, 2, 2);
+INSERT INTO outlets  VALUES (NULL, 'G6OE', 'In use', '22', 51, 2, 2);
 INSERT INTO outlets  VALUES (NULL, 'H0XK', 'Available', '22', 51, 2, 2);
 INSERT INTO stations  VALUES (NULL, 'Fast', 17);
 INSERT INTO outlets  VALUES (NULL, 'K6GN', 'Available', '100', 52, 1, 1);
@@ -292,7 +292,7 @@ INSERT INTO outlets  VALUES (NULL, 'G9WZ', 'Available', '100', 56, 1, 1);
 -- location 19
 INSERT INTO locations  VALUES (NULL,'Prisma Kangasala', 'Mäkirinteentie 10 36220 Kangasala Finland', 61.476166, 23.978113, 'Prisma Kangasala 19.jpg');
 INSERT INTO stations  VALUES (NULL, 'Fast', 19);
-INSERT INTO outlets  VALUES (NULL, 'T8GH', 'Available', '150', 57, 1, 1);
+INSERT INTO outlets  VALUES (NULL, 'T8GH', 'In use', '150', 57, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 19);
 INSERT INTO outlets  VALUES (NULL, 'I0HD', 'Available', '150', 58, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 19);
@@ -304,13 +304,13 @@ INSERT INTO locations  VALUES (NULL,'Prisma Ylivieska', 'Savarinkatu 9, 84100 Yl
 INSERT INTO stations  VALUES (NULL, 'Fast', 20);
 INSERT INTO outlets  VALUES (NULL, 'Y1VP', 'Available', '50', 60, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Fast', 20);
-INSERT INTO outlets  VALUES (NULL, 'C7PT', 'Available', '100', 61, 1, 1);
+INSERT INTO outlets  VALUES (NULL, 'C7PT', 'In use', '100', 61, 1, 1);
 INSERT INTO stations  VALUES (NULL, 'Slow', 20);
 INSERT INTO outlets  VALUES (NULL, 'O7LM', 'Available', '22', 62, 2, 3);
 INSERT INTO outlets  VALUES (NULL, 'V3KF', 'Available', '22', 62, 2, 3);
 INSERT INTO stations  VALUES (NULL, 'Slow', 20);
 INSERT INTO outlets  VALUES (NULL, 'B8KK', 'Available', '22', 63, 2, 3);
-INSERT INTO outlets  VALUES (NULL, 'M6JD', 'Available', '22', 63, 2, 3);
+INSERT INTO outlets  VALUES (NULL, 'M6JD', 'In use', '22', 63, 2, 3);
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
 
