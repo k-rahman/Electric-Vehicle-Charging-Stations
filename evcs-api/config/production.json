@@ -1,0 +1,7 @@
+{
+  "database": {
+    "name": "EVCS",
+    "host": "evcs.ckjgdkrihxzn.us-east-1.rds.amazonaws.com",
+    "port": "3306"
+  }
+}
