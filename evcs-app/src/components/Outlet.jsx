@@ -19,7 +19,7 @@ const Outlet = (props) => {
 
    return (
       <li className='list-group-item'>
-         <div className="row justify-content-between mt-2"> {/*main row*/}
+         <div className="row justify-content-between my-1"> {/*main row*/}
             <div className={`${styles['plug-img-container']} col-3`}> {/*first column*/}
                <img
                   src={`${server}/images/${img}`}

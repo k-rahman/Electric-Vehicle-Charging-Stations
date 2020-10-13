@@ -1,7 +1,6 @@
 import React, {createRef} from 'react';
 import $ from 'jquery';
 import Joi from 'joi';
-import { toast } from 'react-toastify';
 import { login } from '../services/authService';
 import Modal from './common/Modal';
 import Form from './common/Form';

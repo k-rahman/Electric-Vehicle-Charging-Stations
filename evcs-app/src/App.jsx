@@ -15,7 +15,6 @@ import Monitor from './components/Monitor';
 import NotFound from './components/common/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import { login } from './services/authService';
 
 let historySearch = [];
 
@@ -68,7 +67,6 @@ const App = () => {
 
    const handleLocationSelect = async locationId => {
       const { data: location } = await getLocationById(locationId);
-      console.log('location data is ', location);
       setSelectedLocation(location);
    }
 

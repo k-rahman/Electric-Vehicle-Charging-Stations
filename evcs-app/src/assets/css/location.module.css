@@ -64,6 +64,8 @@ padding-bottom: 0px;
 .charging-btn-3d:focus {
     outline:thin none;
     color: #FEFFFF!important;
+    border: 1px solid #FEFFFF!important;
+    box-shadow: 0 0 0 -0.8rem #3AAFA9!important;
 }
 .charging-btn-3d:active {
     top:9px;
@@ -75,6 +77,6 @@ padding-bottom: 0px;
 } 
 
 .charging-btn {
-    box-shadow:0 0 1px 1px #FEFFFF inset, 0 3px 4px 2px rgba(28, 48, 48, 0.4) inset, 0 8px 1px 1px #2B7A78, 0 8px 0 1px rgba(255,255,255,0.6), 0 8px 8px 1px rgba(255,255,255,0.4);
+    box-shadow: 0 0 1px 1px #FEFFFF inset, 0 -1px 1px 2px rgba(28, 48, 48, 0.8) inset, 0 0px 1px 1px #2B7A78;
     background-color:#3AAFA9!important;
 }

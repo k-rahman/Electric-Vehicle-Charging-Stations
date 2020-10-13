@@ -13,4 +13,5 @@
 .available-count {
   display: flex;
   justify-content: flex-end;
+  align-self: center;
 }

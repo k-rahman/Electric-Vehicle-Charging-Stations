@@ -14,9 +14,9 @@ const Map = ({ locations, selectedLocation, onPopupClose, onResult }) => {
   const [viewport, setViewport] = useState({
     width: '100wh',
     height: '100vh',
-    latitude: 61.9241,
+    latitude: 62.9241,
     longitude: 25.7482,
-    zoom: 5,
+    zoom: 3,
   });
 
   const transition = {
