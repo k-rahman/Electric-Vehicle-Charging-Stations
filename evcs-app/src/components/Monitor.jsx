@@ -27,11 +27,12 @@ class Monitor extends Component {
   modalRef = createRef();
 
   componentDidMount() {
-    setTimeout(() => this.start(), 3000);
+    this.timeout = setTimeout(() => this.start(), 3000);
   }
 
   componentWillUnmount() {
     clearInterval(this.update);
+    clearTimeout(this.timeout);
   }
 
   start = () => {
@@ -48,7 +49,7 @@ class Monitor extends Component {
     const timeUnits = convertTime(timeElapsed);
 
     const energy = this.calculateEnergy(timeElapsed);
-    const cost = this.claculateCost(timeElapsed, energy);
+    const cost = this.calculateCost(timeElapsed, energy);
 
     this.setState({
       timeElapsed,
@@ -97,15 +98,15 @@ class Monitor extends Component {
     location: this.props.selectedLocation.id,
   });
 
-  claculateCost = (timeElapsed, energy) => {
+  calculateCost = (timeElapsed, energy) => {
     if (this.props.outlet.unit === 'kWh')
       return Math.floor((energy * this.props.outlet.payment) * 100) / 100;
 
-    return Math.floor(this.props.outlet.payment * ((timeElapsed / 1000 / 60) % 60) * 100) / 100;
+    return Math.floor(this.props.outlet.payment * ((timeElapsed / 1000 / 60)) * 100) / 100;
   }
 
   calculateEnergy = timeElapsed => {
-    return Math.floor((this.props.outlet.power * (timeElapsed / (1000 * 60 * 60)) % 24) * 100) / 100;
+    return Math.floor((this.props.outlet.power * (timeElapsed / (1000 * 60 * 60))) * 100) / 100;
   }
 
   handleMonitorClose = () => {
@@ -154,15 +155,15 @@ class Monitor extends Component {
   }
 
   monitorHeader = () => {
-    const { showFinalResult, isRunning, secs } = this.state;
-    if (!showFinalResult && isRunning && secs > 0)
+    const { showFinalResult, isRunning, timeElapsed } = this.state;
+    if (!showFinalResult && isRunning && timeElapsed > 0)
       return <span className={styles.charging}>Charging</span>;
 
     return 'Charging screen';
   }
 
   render() {
-    const { secs } = this.state;
+    const { timeElapsed } = this.state;
     return (
       <Modal
         ref={this.modalRef}
@@ -172,8 +173,8 @@ class Monitor extends Component {
         showCloseButton={false}
         width='750px'
       >
-        {(secs > 0) && this.monitorState()}
-        {(secs === 0) && <Processing />}
+        {(timeElapsed > 0) && this.monitorState()}
+        {(timeElapsed === 0) && <Processing />}
       </Modal>
     );
   }
